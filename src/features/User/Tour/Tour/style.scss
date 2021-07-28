@@ -1,0 +1,83 @@
+@import "../../../../scss/mixins";
+@import "../../../../scss/reset";
+@import "../../../../scss/variables";
+.tour {
+	width: calc(100% / 4);
+	display: flex;
+	flex-direction: column;
+	background-color: #fff;
+	transition: 0.35s;
+	margin-bottom: 2rem;
+	padding: 1rem;
+
+	&:hover {
+		transform: translateY(-10px);
+	}
+
+	&__img {
+		width: 100%;
+		height: 17.7rem;
+		object-fit: cover;
+	}
+
+	&__desc {
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+	}
+
+	&__title {
+		font-size: 1.4rem;
+		font-weight: 500;
+		margin-bottom: 1rem;
+
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		/* number of lines to show */
+		-webkit-box-orient: vertical;
+	}
+
+	&__transportation {
+		margin-bottom: 1rem;
+	}
+
+	&__schedule,
+	&__time {
+		margin-bottom: 1rem;
+	}
+
+	&__schedule p,
+	&__time p {
+		font-size: 1.2rem;
+		color: #666666;
+	}
+
+	&__schedule p span,
+	&__time p span {
+		color: #ff5722;
+	}
+
+	&__action {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	&__price {
+		font-size: 1.8rem;
+		color: #ff5722;
+	}
+
+	&__booking {
+		font-size: 1.3em;
+		padding: 1rem 2rem;
+		color: #fff;
+		background-color: #ff5722;
+		border: 1px solid #ff5722;
+		outline: none;
+		cursor: pointer;
+	}
+}

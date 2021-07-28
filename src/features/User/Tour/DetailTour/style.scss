@@ -1,0 +1,84 @@
+@import "../../scss/mixins";
+@import "../../scss/reset";
+@import "../../scss/variables";
+
+.detail-tour {
+	padding: 5rem 0;
+	background-color: #f3f5f7;
+
+	&__container {
+		@include container;
+	}
+
+	&__content {
+		display: flex;
+		background-color: #fff;
+	}
+
+	&__carousel {
+		flex: 0.6;
+	}
+
+	&__info {
+		flex: 0.4;
+		padding: 2rem;
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__name {
+		font-size: 2rem;
+		font-weight: 500;
+		color: #333;
+		margin-bottom: 2.5rem;
+	}
+
+	&__price {
+		font-size: 2.4rem;
+		font-weight: 700;
+		color: #ff5722;
+		margin-bottom: 2rem;
+	}
+
+	&__desc {
+		font-size: 1.6rem;
+		color: #333;
+		margin-bottom: 2rem;
+		line-height: 1.5;
+	}
+
+	&__time {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 2rem;
+
+		div {
+			display: flex;
+			align-items: center;
+			font-size: 1.6rem;
+
+			&:first-of-type {
+				margin-bottom: 2rem;
+			}
+		}
+
+		span {
+			margin-left: 1rem;
+			color: #ff5722;
+		}
+	}
+
+	&__booking {
+		align-self: flex-start;
+		font-size: 1.4em;
+		font-weight: 600;
+		padding: 1.5rem 3rem;
+		color: #fff;
+		background-color: #1ba0e2;
+		border: 1px solid #1ba0e2;
+		border-radius: 5px;
+		outline: none;
+		cursor: pointer;
+	}
+}

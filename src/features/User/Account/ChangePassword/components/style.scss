@@ -1,0 +1,66 @@
+@import "../../../scss/mixins";
+@import "../../../scss/reset";
+@import "../../../scss/variables";
+
+.change-pw {
+	padding: 5rem;
+	background-color: #f3f5f7;
+
+	&__container {
+		@include container;
+	}
+
+	&__content {
+		display: flex;
+	}
+
+	&__form {
+		background-color: #fff;
+		padding: 2rem 3rem;
+
+		flex: 0.8;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+
+	&__title {
+		font-size: 2.2rem;
+		font-weight: 700;
+		color: #333;
+		margin-bottom: 3rem;
+	}
+
+	&__input {
+		width: 70%;
+
+		display: flex;
+		align-items: center;
+		margin: 0 auto;
+		margin-bottom: 3rem;
+
+		label {
+			flex: 0.5;
+			font-size: 1.4rem;
+		}
+
+		input {
+			flex: auto;
+			padding: 1rem;
+			font-size: 1.4rem;
+			border: 1px solid rgba(0, 0, 0, 0.14);
+		}
+	}
+
+	&__confirm {
+		font-size: 1.8em;
+		padding: 1rem 2rem;
+		margin: auto;
+		margin-left: 27rem;
+		color: #fff;
+		background-color: #ff5722;
+		border: 1px solid #ff5722;
+		outline: none;
+		cursor: pointer;
+	}
+}

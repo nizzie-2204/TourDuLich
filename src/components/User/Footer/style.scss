@@ -1,0 +1,82 @@
+@import "../../../scss/mixins";
+@import "../../../scss/reset";
+@import "../../../scss/variables";
+
+.footer {
+	padding: 2rem 0;
+	background-color: #333333;
+
+	&__container {
+		@include container;
+
+		display: flex;
+	}
+
+	&__left {
+		flex: 0.3;
+		display: flex;
+		flex-direction: column;
+		align-items: stretch;
+		justify-content: stretch;
+	}
+
+	&__logo {
+		margin-bottom: 3rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&__logo img {
+		max-width: 14.5rem;
+	}
+
+	&__contact {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__contact p {
+		font-size: 1.4rem;
+		font-weight: bold;
+		color: #888888;
+		margin-bottom: 2rem;
+	}
+
+	&__contact p span {
+		font-weight: normal;
+	}
+
+	&__right {
+		flex: 0.6;
+		padding: 2rem 1rem;
+		display: flex;
+		align-items: stretch;
+		justify-content: space-between;
+	}
+
+	&__tour {
+		width: calc(100% / 4 - 1.5rem);
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__tour-title {
+		font-size: 1.6rem;
+		margin-bottom: 1rem;
+		color: #fff;
+	}
+
+	&__tour-list {
+		display: flex;
+		flex-direction: column;
+		list-style: none;
+	}
+
+	&__tour-list li a {
+		font-size: 1.4rem;
+		color: #888888;
+		display: block;
+		margin-bottom: 1rem;
+	}
+}

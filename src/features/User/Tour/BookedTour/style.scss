@@ -1,0 +1,77 @@
+@import "../../scss/mixins";
+@import "../../scss/reset";
+@import "../../scss/variables";
+
+.booked-tours {
+	&__item {
+		display: flex;
+		border-top: 1px solid rgba(0, 0, 0, 0.09);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+		padding: 1rem;
+		margin-bottom: 2rem;
+	}
+
+	&__item-image {
+		width: 12rem;
+		height: 12rem;
+		margin-right: 2rem;
+
+		img {
+			display: block;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	&__item-desc {
+		flex: 0.5;
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__item-name {
+		font-size: 1.6rem;
+		color: #333;
+		margin-bottom: 1.5rem;
+	}
+
+	&__item-time {
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 1rem;
+
+		div {
+			display: flex;
+			align-items: center;
+			font-size: 1.4rem;
+			margin-bottom: 1rem;
+		}
+
+		span {
+			margin-left: 1rem;
+			color: #ff5722;
+		}
+	}
+
+	&__item-price {
+		align-self: center;
+		flex: 0.3;
+		font-size: 1.4rem;
+		font-weight: 700;
+		color: #ff5722;
+		text-align: center;
+	}
+
+	&__cancel {
+		align-self: center;
+		font-size: 1.6rem;
+		text-align: center;
+		padding: 1rem 2rem;
+		margin: 0 auto;
+		color: #fff;
+		background-color: #ff5722;
+		border: 1px solid #ff5722;
+		cursor: pointer;
+	}
+}

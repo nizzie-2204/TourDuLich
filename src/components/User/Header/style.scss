@@ -1,0 +1,106 @@
+@import "../../../scss/mixins";
+@import "../../../scss/reset";
+@import "../../../scss/variables";
+
+.header {
+	&__container {
+		@include container;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__top {
+		display: flex;
+		align-items: center;
+		padding: 1rem 0;
+	}
+
+	&__logo {
+		flex: 0.2;
+	}
+
+	&__logo img {
+		max-height: 7rem;
+		min-height: 7rem;
+	}
+
+	&__search {
+		flex: 0.6;
+		position: relative;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	&__input {
+		font-size: 1.6rem;
+		padding: 1rem 2rem;
+		border: 1px solid #1ba0a2;
+		border-radius: 24px;
+		width: 70%;
+	}
+
+	&__input:focus {
+		outline: none;
+	}
+
+	&__search-icon {
+		position: absolute;
+		content: "";
+		top: 50%;
+		right: 18%;
+		transform: translateY(-50%);
+		font-size: 1.8rem;
+	}
+
+	&__user {
+		flex: 0.2;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		color: #333;
+		cursor: pointer;
+	}
+
+	&__user-icon {
+		font-size: 3rem;
+		margin-right: 1rem;
+	}
+
+	&__user-text {
+		font-size: 1.6rem;
+	}
+
+	&__nav {
+		background-color: #f6f6f6;
+		border-bottom: 1px solid #ddd;
+	}
+	&__list {
+		display: flex;
+		align-items: center;
+		list-style: none;
+	}
+
+	&__link {
+		padding: 1.8rem 0;
+		display: block;
+		flex: auto;
+		text-align: center;
+		cursor: pointer;
+	}
+
+	&__link a {
+		color: #696969;
+		font-size: 1.4rem;
+		font-weight: 600;
+		text-transform: uppercase;
+	}
+
+	&__link:hover a {
+		color: #1ba0a2;
+	}
+}

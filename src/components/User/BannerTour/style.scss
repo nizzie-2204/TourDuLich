@@ -1,0 +1,11 @@
+@import "../../../scss/mixins";
+@import "../../../scss/reset";
+@import "../../../scss/variables";
+
+.banner-tour {
+	height: 38rem;
+	background-image: url("https://1.bp.blogspot.com/-hudK1R2Js7A/YEMYrlQznLI/AAAAAAAACqI/OVJovkLKUiw176kXZtAFl24TpZz7QAisQCLcBGAsYHQ/s16000/cat-banner-2.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}

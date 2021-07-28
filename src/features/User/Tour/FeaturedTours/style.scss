@@ -1,0 +1,55 @@
+@import "../../../../scss/mixins";
+@import "../../../../scss/reset";
+@import "../../../../scss/variables";
+
+.featured-tours {
+	padding: 3.5rem 0;
+	background-color: #f3f5f7;
+
+	&__container {
+		@include container;
+	}
+
+	&__content {
+		display: flex;
+		flex-direction: column;
+	}
+
+	&__title {
+		margin-bottom: 3rem;
+		display: flex;
+		flex-direction: column;
+		text-align: center;
+
+		h3 {
+			font-size: 3rem;
+			font-weight: 600;
+			color: #333333;
+			margin-bottom: 1rem;
+		}
+
+		p {
+			font-size: 1.4rem;
+			color: #888888;
+			word-spacing: 2px;
+		}
+	}
+
+	&__see-more {
+		font-size: 1.4em;
+		font-weight: 600;
+		padding: 1.5rem 3rem;
+		margin: auto;
+		color: #ff5722;
+		background-color: transparent;
+		border: 1px solid #ff5722;
+		outline: none;
+		cursor: pointer;
+		transition: 0.25s;
+
+		&:hover {
+			background-color: #ff5722;
+			color: #fff;
+		}
+	}
+}
