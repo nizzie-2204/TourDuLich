@@ -1,0 +1,33 @@
+@import "../../../scss/mixins";
+@import "../../../scss/reset";
+@import "../../../scss/variables";
+
+.pagination {
+	padding: 3rem 0;
+	background-color: #f3f5f7;
+
+	&__container {
+		@include container;
+	}
+
+	&__content {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		justify-content: center;
+	}
+
+	&__page {
+		width: 3rem;
+		height: 3rem;
+		font-size: 1.6rem;
+		background-color: #ff5722;
+		color: #fff;
+		padding: 1rem;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+	}
+}

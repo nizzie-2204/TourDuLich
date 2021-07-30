@@ -21,10 +21,6 @@ const BookedTour = ({ tour, supportExpense }) => {
 			.catch((error) => console.log(error));
 	};
 
-	useEffect(() => {
-		console.log(bookedTours);
-	}, [bookedTours]);
-
 	return (
 		<div className="booked-tours__item">
 			<div className="booked-tours__item-id">ID: {tour?.tour?.id}</div>

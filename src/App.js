@@ -27,8 +27,10 @@ function App() {
 						<Switch>
 							<PublicRoute exact path="/" component={Home} />
 							<PublicRoute restricted path="/login" component={Login} />
-							<PublicRoute path="/tours" component={AllTour} />
+							<PublicRoute exact path="/tours" component={AllTour} />
+							<PublicRoute path="/tours?page=" component={AllTour} />
 							<PublicRoute path="/tour/:id" component={DetailTourPage} />
+
 							<PrivateRoute path="/account" component={Account} />
 							<PrivateRoute path="/password" component={ChangePassword} />
 							<PrivateRoute path="/booked" component={BookedTourPage} />

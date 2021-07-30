@@ -1,10 +1,17 @@
 import axiosClient from "../Axios/axios";
 
 const tourAPI = {
-	getTours: async (limit) => {
+	getTours: async () => {
 		return await axiosClient({
 			method: "get",
-			url: `/tour?sort=asc&item=${limit}`,
+			url: `/tour`,
+		});
+	},
+
+	getToursByPage: async (page) => {
+		return await axiosClient({
+			method: "get",
+			url: `/tour?page=${page}`,
 		});
 	},
 

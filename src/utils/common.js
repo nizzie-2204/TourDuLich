@@ -27,3 +27,7 @@ export const checkValidDateTour = (currDate, startDate, endDate) => {
 		return false;
 	}
 };
+
+export const totalPages = (total, limit) => {
+	return Math.ceil(total / limit);
+};

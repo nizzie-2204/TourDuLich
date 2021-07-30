@@ -1,11 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import tourAPI from "../../../api/Tour/tourApi";
 
-export const getTours = createAsyncThunk("tour/getTours", async (limit) => {
-	const tours = await tourAPI.getTours(limit);
+export const getTours = createAsyncThunk("tour/getTours", async () => {
+	const tours = await tourAPI.getTours();
 
 	return tours.data;
 });
+
+export const getToursByPage = createAsyncThunk(
+	"tour/getToursByPage",
+	async (page) => {
+		const tours = await tourAPI.getToursByPage(page);
+
+		return tours.data;
+	}
+);
 
 export const getFeaturedTours = createAsyncThunk(
 	"tour/getFeaturedTours",
@@ -42,8 +51,12 @@ export const getBookedTours = createAsyncThunk(
 
 export const cancelTour = createAsyncThunk(
 	"tour/cancelTour",
-	async ({ id, token }) => {
+	async ({ id, token }, thunkAPI) => {
 		const cancelTour = await tourAPI.cancelTour(id, token);
+
+		if (cancelTour) {
+			thunkAPI.dispatch(getBookedTours(token));
+		}
 
 		return cancelTour.data;
 	}
@@ -109,6 +122,15 @@ const TourSlice = createSlice({
 		[getBookedTours.fulfilled]: (state, action) => {
 			state.bookedToursLoading = false;
 			state.bookedTours = action.payload.dangky;
+		},
+
+		[getToursByPage.pending]: (state) => {
+			state.tourLoading = true;
+		},
+
+		[getToursByPage.fulfilled]: (state, action) => {
+			state.tourLoading = false;
+			state.tours = action.payload.data;
 		},
 	},
 });

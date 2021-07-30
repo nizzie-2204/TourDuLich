@@ -4,9 +4,6 @@ import { Link, useParams } from "react-router-dom";
 import { formatDate, formatPrice } from "../../../../utils/common";
 
 const Tour = ({ tour }) => {
-	console.log(tour?.hinhtour[0]?.ht_path.length);
-	console.log(tour?.hinhtour[0]?.ht_path.substr(78));
-
 	return (
 		<Link to={`/tour/${tour?.id}`} className="tour">
 			<Link to={`/tour/${tour?.id}`} className="tour__img">

@@ -23,7 +23,9 @@ const BookedTours = () => {
 		};
 
 		fetchBookedTours();
+	}, []);
 
+	useEffect(() => {
 		const fetchSupportExpense = () => {
 			const token = localStorage.getItem("userToken");
 			const action = getSupportExpense(token);
@@ -46,7 +48,9 @@ const BookedTours = () => {
 					<SidebarUser />
 					<div className="booked-tours__list">
 						<h3 className="booked-tours__title">
-							{!bookedTours ? "Các tour đã đặt" : "Bạn chưa đặt tour nào"}
+							{bookedTours.length > 0
+								? "Các tour đã đặt"
+								: "Bạn chưa đặt tour nào"}
 						</h3>
 
 						{bookedTours?.map((tour) => {
