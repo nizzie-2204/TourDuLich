@@ -11,6 +11,7 @@ import DetailTourPage from "./pages/DetailTourPage/DetailTourPage";
 import { Provider } from "react-redux";
 import PublicRoute from "./components/User/PublicRoute/PublicRoute";
 import PrivateRoute from "./components/User/PrivateRoute.js/PrivateRoute";
+import BookedTourPage from "./pages/BookedTourPage/BookedTourPage";
 
 import store from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
@@ -30,7 +31,7 @@ function App() {
 							<PublicRoute path="/tour/:id" component={DetailTourPage} />
 							<PrivateRoute path="/account" component={Account} />
 							<PrivateRoute path="/password" component={ChangePassword} />
-							{/* <Route path="/booked" component={BookedTourPage} /> */}
+							<PrivateRoute path="/booked" component={BookedTourPage} />
 							{/* <Route path="/password" component={ChangePassword} /> */}
 						</Switch>
 					</Router>

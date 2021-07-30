@@ -34,22 +34,16 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	// }, []);
 
 	return (
-		<>
-			{authLoading ? (
-				<FadeLoader css={override} height="15px" width="2px" radius="2px" />
-			) : (
-				<Route
-					{...rest}
-					render={(props) => {
-						return isAuthenticated && user ? (
-							<Component {...props} />
-						) : (
-							<Redirect to="/" />
-						);
-					}}
-				/>
-			)}
-		</>
+		<Route
+			{...rest}
+			render={(props) => {
+				return isAuthenticated && user ? (
+					<Component {...props} />
+				) : (
+					<Redirect to="/" />
+				);
+			}}
+		/>
 	);
 };
 

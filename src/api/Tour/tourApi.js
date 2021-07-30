@@ -15,27 +15,35 @@ const tourAPI = {
 		});
 	},
 
-	bookTour: async (user, token) => {
+	bookTour: async (dataForm, token) => {
 		let formData = new FormData();
 
-		console.log(user);
-		console.log(token);
+		formData.append("dkt_hoten", dataForm.name);
+		formData.append("dkt_sdt", dataForm.phone);
+		formData.append("dkt_namsinh", dataForm.yearOfBirth);
+		formData.append("dkt_gioitinh", dataForm.sex);
+		formData.append("dkt_diachi", dataForm.address);
+		formData.append("t_id", dataForm.idTour);
 
-		formData.append("dkt_hoten");
-		formData.append("dkt_sdt");
-		formData.append("dkt_namsinh");
-		formData.append("dkt_gioitinh");
-		formData.append("dkt_diachi");
-		formData.append("t_id");
+		return await axiosClient({
+			method: "post",
+			url: "/dangkytour",
+			headers: {
+				"Content-Type": "multipart/form-data",
+				Authorization: `Bearer ${token}`,
+			},
+			data: formData,
+		});
+	},
 
-		// return await axiosClient({
-		// 	method: "post",
-		// 	url: "/dangkytour",
-		// 	headers: {
-		// 		"Content-Type": "multipart/form-data",
-		// 	},
-		// 	data: formData,
-		// });
+	getBookedTours: async (token) => {
+		return await axiosClient({
+			method: "get",
+			url: "/dangkytour",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 	},
 
 	cancelTour: async (id, token) => {
@@ -48,7 +56,7 @@ const tourAPI = {
 		});
 	},
 
-	getSupportMoney: async (token) => {
+	getSupportExpense: async (token) => {
 		return await axiosClient({
 			method: "get",
 			url: "dangkytour/tienhotro",

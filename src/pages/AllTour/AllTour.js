@@ -25,7 +25,7 @@ const AllTour = () => {
 
 	useEffect(() => {
 		const fetchTours = () => {
-			const action = getTours(23);
+			const action = getTours(9999);
 			dispatch(action)
 				.then(unwrapResult)
 				.then((data) => console.log(data))

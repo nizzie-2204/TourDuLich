@@ -24,10 +24,19 @@ export const getTour = createAsyncThunk("tour/getTour", async (id) => {
 
 export const bookTour = createAsyncThunk(
 	"tour/bookTour",
-	async ({ user, token }) => {
-		const bookTour = await tourAPI.bookTour(user, token);
+	async ({ dataForm, token }) => {
+		const bookTour = await tourAPI.bookTour(dataForm, token);
 
 		return bookTour.data;
+	}
+);
+
+export const getBookedTours = createAsyncThunk(
+	"tour/getBookedTours",
+	async (token) => {
+		const result = await tourAPI.getBookedTours(token);
+
+		return result.data;
 	}
 );
 
@@ -40,12 +49,14 @@ export const cancelTour = createAsyncThunk(
 	}
 );
 
-export const getSupportMoney = createAsyncThunk(
+export const getSupportExpense = createAsyncThunk(
 	"tour/getSupportMoney",
 	async (token) => {
-		const getSupportMoney = await tourAPI.getSupportMoney(token);
+		const getSupportExpense = await tourAPI.getSupportExpense(token);
 
-		return getSupportMoney.data;
+		console.log(getSupportExpense);
+
+		return getSupportExpense.data;
 	}
 );
 
@@ -58,6 +69,8 @@ const TourSlice = createSlice({
 		featuredToursLoading: false,
 		tour: null,
 		tourLoading: false,
+		bookedTours: null,
+		bookedToursLoading: false,
 	},
 	reducers: {},
 
@@ -87,6 +100,15 @@ const TourSlice = createSlice({
 		[getTour.fulfilled]: (state, action) => {
 			state.tourLoading = false;
 			state.tour = action.payload.tour;
+		},
+
+		[getBookedTours.pending]: (state) => {
+			state.bookedToursLoading = true;
+		},
+
+		[getBookedTours.fulfilled]: (state, action) => {
+			state.bookedToursLoading = false;
+			state.bookedTours = action.payload.dangky;
 		},
 	},
 });
