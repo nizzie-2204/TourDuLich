@@ -3,15 +3,15 @@ import "./style.scss";
 
 const BannerHome = () => {
 	return (
-		<div class="banner">
-			<div class="banner__container">
-				<div class="banner__content">
-					<h2 class="banner__title">Đặt Tour du lịch!</h2>
-					<p class="banner__sub-title">
+		<div className="banner">
+			<div className="banner__container">
+				<div className="banner__content">
+					<h2 className="banner__title">Đặt Tour du lịch!</h2>
+					<p className="banner__sub-title">
 						Hơn 300 tours du lịch ở Việt Nam và Quốc tế
 					</p>
-					<form class="banner__search">
-						<div class="banner__input">
+					<form className="banner__search">
+						<div className="banner__input">
 							<div className="banner__input-icon">
 								<ion-icon name="location-outline"></ion-icon>
 							</div>
@@ -22,7 +22,7 @@ const BannerHome = () => {
 								placeholder="Bạn  muốn đi đâu?"
 							/>
 						</div>
-						<button type="submit" class="banner__submit">
+						<button type="submit" className="banner__submit">
 							Tìm
 						</button>
 					</form>

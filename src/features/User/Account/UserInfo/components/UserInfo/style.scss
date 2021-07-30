@@ -1,6 +1,6 @@
-@import "../../scss/mixins";
-@import "../../scss/reset";
-@import "../../scss/variables";
+@import "../../../../../../scss/mixins";
+@import "../../../../../../scss/reset";
+@import "../../../../../../scss/variables";
 
 .user-info {
 	padding: 5rem;
@@ -12,6 +12,18 @@
 
 	&__content {
 		display: flex;
+	}
+
+	&__error-input {
+		font-size: 1.4rem;
+		color: red;
+		margin-bottom: 3rem;
+		margin-left: 14.5rem;
+		margin-top: -2rem;
+	}
+
+	&__error-field {
+		border: 1px solid red !important;
 	}
 
 	&__title {

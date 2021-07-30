@@ -3,7 +3,8 @@
 @import "../../../../scss/variables";
 
 .tours-list {
-	padding: 5rem 0;
+	padding: 2rem 0;
+	background-color: #f3f5f7;
 
 	&__container {
 		@include container;
@@ -11,6 +12,7 @@
 
 	&__content {
 		display: flex;
+		gap: 3rem;
 		flex-wrap: wrap;
 		align-items: stretch;
 		margin-bottom: 2rem;

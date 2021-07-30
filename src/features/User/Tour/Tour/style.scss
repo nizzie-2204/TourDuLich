@@ -2,12 +2,11 @@
 @import "../../../../scss/reset";
 @import "../../../../scss/variables";
 .tour {
-	width: calc(100% / 4);
+	width: calc(100% / 4 - 2.25rem);
 	display: flex;
 	flex-direction: column;
 	background-color: #fff;
 	transition: 0.35s;
-	margin-bottom: 2rem;
 	padding: 1rem;
 
 	&:hover {

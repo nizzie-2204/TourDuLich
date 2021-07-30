@@ -4,16 +4,16 @@ import "./style.scss";
 
 const Footer = () => {
 	return (
-		<footer class="footer">
-			<div class="footer__container">
-				<div class="footer__left">
-					<Link to="/" class="footer__logo">
+		<footer className="footer">
+			<div className="footer__container">
+				<div className="footer__left">
+					<Link to="/" className="footer__logo">
 						<img
 							src="https://2.bp.blogspot.com/--gy8wAHc2v8/YEMvx9o5M4I/AAAAAAAACr4/6be2_QTuimAvVqXdBOIwPwxKu7BltdCdQCK4BGAYYCw/s1600/fot_logo.png"
 							alt=""
 						/>
 					</Link>
-					<div class="footer__contact">
+					<div className="footer__contact">
 						<p>
 							Địa chỉ:
 							<span>
@@ -30,10 +30,10 @@ const Footer = () => {
 						</p>
 					</div>
 				</div>
-				<div class="footer__right">
-					<div class="footer__tour">
-						<h5 class="footer__tour-title">Evo Tour</h5>
-						<ul class="footer__tour-list">
+				<div className="footer__right">
+					<div className="footer__tour">
+						<h5 className="footer__tour-title">Evo Tour</h5>
+						<ul className="footer__tour-list">
 							<li>
 								<Link to="/">Trang chủ</Link>
 							</li>
@@ -60,9 +60,9 @@ const Footer = () => {
 							</li>
 						</ul>
 					</div>
-					<div class="footer__tour">
-						<h5 class="footer__tour-title">Evo Tour</h5>
-						<ul class="footer__tour-list">
+					<div className="footer__tour">
+						<h5 className="footer__tour-title">Evo Tour</h5>
+						<ul className="footer__tour-list">
 							<li>
 								<Link to="/">Trang chủ</Link>
 							</li>
@@ -89,9 +89,9 @@ const Footer = () => {
 							</li>
 						</ul>
 					</div>
-					<div class="footer__tour">
-						<h5 class="footer__tour-title">Evo Tour</h5>
-						<ul class="footer__tour-list">
+					<div className="footer__tour">
+						<h5 className="footer__tour-title">Evo Tour</h5>
+						<ul className="footer__tour-list">
 							<li>
 								<Link to="/">Trang chủ</Link>
 							</li>
@@ -118,9 +118,9 @@ const Footer = () => {
 							</li>
 						</ul>
 					</div>
-					<div class="footer__tour">
-						<h5 class="footer__tour-title">Evo Tour</h5>
-						<ul class="footer__tour-list">
+					<div className="footer__tour">
+						<h5 className="footer__tour-title">Evo Tour</h5>
+						<ul className="footer__tour-list">
 							<li>
 								<Link to="/">Trang chủ</Link>
 							</li>

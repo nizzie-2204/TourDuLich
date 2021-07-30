@@ -1,10 +1,23 @@
 import React from "react";
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
+import { logout } from "../../../features/Auth/authSlice";
 import "./style.scss";
 
 const Header = () => {
+	const dispatch = useDispatch();
+	const history = useHistory();
 	const user = useSelector((state) => state.auth.user);
+
+	const handleLogout = () => {
+		const token = localStorage.getItem("userToken");
+
+		const action = logout(token);
+		dispatch(action).then(() => {
+			localStorage.removeItem("userToken");
+			history.push("/login");
+		});
+	};
 
 	return (
 		<header className="header">
@@ -26,9 +39,9 @@ const Header = () => {
 						</div>
 
 						{user ? (
-							<div to="/login" className="header__user">
+							<div className="header__user" onClick={handleLogout}>
 								<div className="header__user-icon">
-									<ion-icon name="person-circle-outline"></ion-icon>
+									<ion-icon name="log-out-outline"></ion-icon>
 								</div>
 								<p className="header__user-text">Đăng xuất</p>
 							</div>
@@ -44,31 +57,31 @@ const Header = () => {
 				</div>
 			</div>
 			{/* HEADER NAV */}
-			<div class="header__nav">
-				<div class="header__container">
-					<div class="header__list">
-						<li class="header__link">
+			<div className="header__nav">
+				<div className="header__container">
+					<div className="header__list">
+						<li className="header__link">
 							<Link to="/">TRANG CHỦ</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/">GIỚI THIỆU</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/tours">TOUR DU LỊCH</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/account">TÀI KHOẢN</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/">TIN TỨC</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/">KINH NGHIỆM DU LỊCH</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/">FAQ</Link>
 						</li>
-						<li class="header__link">
+						<li className="header__link">
 							<Link to="/">LIÊN HỆ</Link>
 						</li>
 					</div>

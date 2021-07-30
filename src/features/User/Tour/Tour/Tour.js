@@ -1,11 +1,12 @@
 import React from "react";
 import "./style.scss";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { formatPrice } from "../../../../utils/common";
 
-const Tour = () => {
+const Tour = ({ tour }) => {
 	return (
 		<div className="tour">
-			<Link to="/tour/1">
+			<Link to={`/tour/${tour?.id}`}>
 				<img
 					src="https://1.bp.blogspot.com/-76aAZRyIXNc/YD8SpChvElI/AAAAAAAACkY/Sq4cgQidSyY9gA9P3W3xBDIPYhEI2wTjQCLcBGAsYHQ/w480-h320-p-k-no-nu/51510475870552.jpg"
 					alt=""
@@ -14,8 +15,7 @@ const Tour = () => {
 			</Link>
 			<div className="tour__desc">
 				<Link to="/" className="tour__title">
-					Du lịch Hồ Phú Ninh - Tam Thanh - Rừng Dừa Bảy Mẫu - Đà Nẵng - Hội An
-					- Bà Nà - Huế
+					{tour?.t_ten}
 				</Link>
 				<div className="tour__transportation"></div>
 				<div className="tour__schedule">
@@ -31,7 +31,7 @@ const Tour = () => {
 					</p>
 				</div>
 				<div className="tour__action">
-					<div className="tour__price">6,000,000</div>
+					<div className="tour__price">{formatPrice(tour?.t_gia)}</div>
 					<button type="button" className="tour__booking">
 						Đặt tour
 					</button>

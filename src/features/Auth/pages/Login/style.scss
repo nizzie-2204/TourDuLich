@@ -10,6 +10,36 @@
 	justify-content: center;
 	align-items: center;
 
+	&__error-input {
+		font-size: 1.4rem;
+		color: red;
+		margin-bottom: 1.5rem;
+	}
+
+	&__error-field {
+		border: 1px solid red !important;
+	}
+
+	&__error-submit {
+		width: 100%;
+		margin-top: 2rem;
+		padding: 2rem;
+
+		font-size: 1.4rem;
+		background-color: #fdecea;
+		color: red;
+		border: 1px solid red;
+		line-height: 1.4;
+
+		display: flex;
+		align-items: center;
+
+		span:first-child {
+			font-size: 2rem;
+			margin-right: 1rem;
+		}
+	}
+
 	&__form {
 		width: 100%;
 		max-width: 60rem;

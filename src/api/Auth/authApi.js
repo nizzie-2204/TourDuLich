@@ -13,8 +13,14 @@ const authAPI = {
 			headers: { "Content-Type": "multipart/form-data" },
 		});
 	},
-	logout: async () => {
-		return await axiosClient.post("/logout");
+	logout: async (token) => {
+		return await axiosClient("/logout", {
+			method: "post",
+			url: "/logout",
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 	},
 };
 

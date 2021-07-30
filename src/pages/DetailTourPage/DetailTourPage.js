@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import DetailTour from "../../components/DetailTour/DetailTour";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
+import DetailTour from "../../features/User/Tour/DetailTour/DetailTour";
+
+import Footer from "../../components/User/Footer/Footer";
+import Header from "../../components/User/Header/Header";
 
 const DetailTourPage = () => {
 	useEffect(() => {
