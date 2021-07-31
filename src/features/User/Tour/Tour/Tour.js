@@ -1,12 +1,12 @@
 import React from "react";
-import "./style.scss";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { formatDate, formatPrice } from "../../../../utils/common";
+import "./style.scss";
 
 const Tour = ({ tour }) => {
 	return (
 		<Link to={`/tour/${tour?.id}`} className="tour">
-			<Link to={`/tour/${tour?.id}`} className="tour__img">
+			<div to={`/tour/${tour?.id}`} className="tour__img">
 				<img
 					src={
 						tour?.hinhtour[0]?.ht_path &&
@@ -16,7 +16,7 @@ const Tour = ({ tour }) => {
 					}
 					alt={tour?.t_ten}
 				/>
-			</Link>
+			</div>
 			<div className="tour__desc">
 				<h3 className="tour__title">{tour?.t_ten}</h3>
 				<div className="tour__schedule">

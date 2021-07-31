@@ -1,0 +1,77 @@
+.donvi-chitiet {
+	button {
+		padding: 5px;
+		width: 70px;
+		height: 30px;
+		background-color: #59d05d;
+		border: 1px solid #59d05d;
+		cursor: pointer;
+		border-radius: 4px;
+		opacity: 0.9;
+
+		&:nth-of-type(2) {
+			margin: 0 10px;
+		}
+	}
+}
+
+.donvi-chitiet > h3 {
+	padding-top: 20px;
+	margin: 20px 0;
+	border-top: 1px solid #eee;
+}
+
+.donvi-chitiet > h3 > i {
+	color: red;
+}
+
+.donvi-search__kinhphi {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+}
+
+.donvi-search__kinhphi > .donvi-form__group {
+	margin-right: 30px;
+}
+
+.donvi-search__kinhphi > .donvi-form__group > input {
+	align-content: center;
+	padding: 10px;
+	width: 100px;
+	height: 40px;
+}
+
+.donvi-search__kinhphi > .donvi-form__group > button {
+	width: 100px;
+	height: 40px;
+	font-size: 18px;
+	background-color: rgba(0, 0, 0, 0.05);
+	border: 1px solid#eee;
+}
+
+.donvi-search__kinhphi > .donvi-form__group > button:hover {
+	background-color: rgba(29, 122, 243, 0.26);
+}
+
+.donvi-show__kinhphi {
+	margin-top: 30px;
+	font-size: 16px;
+}
+
+.donvi-show__kinhphi:hover {
+	height: max-content;
+}
+
+.donvi-show__kinhphi > .donvi-form__group {
+	margin-bottom: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.donvi-show__kinhphi > .donvi-form__group > input {
+	width: 200px;
+	height: 30px;
+	padding: 10px;
+}

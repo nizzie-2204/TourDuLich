@@ -1,12 +1,12 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { unwrapResult } from "@reduxjs/toolkit";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import * as yup from "yup";
 import { login } from "../../authSlice";
 import "./style.scss";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
 
 const schema = yup.object().shape({
 	username: yup.string().required("Vui lòng nhập tên tài khoản"),
@@ -40,17 +40,24 @@ const Login = () => {
 		dispatch(action)
 			.then(unwrapResult)
 			.then((data) => {
-				console.log(data);
+				console.log(data.message.ltk_id);
 				// User -> go to home page
 				if (data.message.ltk_id === 3) {
 					localStorage.setItem("userToken", data.Token);
-					history.push("/");
+					history.push("/tours");
 				}
-				// Admin -> go to admin dashboard
-				// if (data.message.ltk_id === 1 || data.message.ltk_id === 2) {
-				// localStorage.setItem("userToken", data.Token)
-				// 	history.push("/");
-				// }
+				// // Admin system -> go to admin unit
+				if (data.message.ltk_id === 1) {
+					localStorage.setItem("adminToken", data.Token);
+					history.push("/admin/unit");
+				}
+
+				// // // Admin unit -> go to admin employee || admin tour
+				if (data.message.ltk_id === 2) {
+					console.log(data.message.ltk_id);
+					localStorage.setItem("adminToken", data.Token);
+					history.push("/admin/employee");
+				}
 			})
 			.catch((error) => {
 				console.log(error);

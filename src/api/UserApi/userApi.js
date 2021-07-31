@@ -14,7 +14,7 @@ const userAPI = {
 	editInfo: async (data, token) => {
 		const dataInfo = {
 			nv_ten: data.name,
-			nv_namsinh: data.yearOfBirth,
+			nv_namsinh: data.yearOfBirth.toString(),
 			nv_diachi: data.address,
 			nv_sdt: data.phone,
 			nv_gioitinh: data.sex,
@@ -25,10 +25,10 @@ const userAPI = {
 			url: "/nhanvien",
 			headers: {
 				Accept: "application/json",
-				// "Content-Type": "application/json",
-				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+				Authorization: "Bearer " + token,
 			},
-			body: JSON.stringify(dataInfo),
+			data: JSON.stringify(dataInfo),
 		});
 	},
 
@@ -37,11 +37,11 @@ const userAPI = {
 			method: "PUT",
 			url: "/nhanvien",
 			headers: {
-				// Accept: "application/json",
-				// "Content-Type": "application/json",
+				Accept: "application/json",
+				"Content-Type": "application/json",
 				Authorization: `Bearer ${token}`,
 			},
-			body: JSON.stringify(dataUser),
+			data: JSON.stringify(dataUser),
 		});
 	},
 };

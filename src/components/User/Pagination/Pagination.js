@@ -2,8 +2,6 @@ import React from "react";
 import "./style.scss";
 
 const Pagination = ({ totalPages, paginate }) => {
-	console.log(totalPages);
-
 	const totalPagesArr = [];
 
 	for (let i = 1; i <= totalPages; i++) {

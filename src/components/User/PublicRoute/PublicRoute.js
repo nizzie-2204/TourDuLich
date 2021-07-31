@@ -1,11 +1,8 @@
-import { unwrapResult } from "@reduxjs/toolkit";
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
-import { getUserInfo } from "../../../features/Auth/authSlice";
-import FadeLoader from "react-spinners/FadeLoader";
 import { css } from "@emotion/react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, Route, useHistory, useLocation } from "react-router-dom";
+import FadeLoader from "react-spinners/FadeLoader";
 
 const override = css`
 	display: block;
@@ -17,7 +14,11 @@ const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const authLoading = useSelector((state) => state.auth.authLoading);
 
-	const dispatch = useDispatch();
+	const location = useLocation();
+	console.log(location);
+	const history = useHistory();
+
+	// const dispatch = useDispatch();
 
 	return (
 		<>
@@ -28,7 +29,7 @@ const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
 					{...rest}
 					render={(props) => {
 						return isAuthenticated && restricted ? (
-							<Redirect to="/" />
+							history.goBack()
 						) : (
 							<Component {...props} />
 						);

@@ -7,6 +7,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { editUserInfo, getUserInfo } from "../../../../../Auth/authSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const phoneRegExp =
 	/^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -55,20 +56,21 @@ const UserInfo = () => {
 		const action = editUserInfo({ data, token });
 		dispatch(action)
 			.then(unwrapResult)
-			.then((data) => console.log(data))
-			.catch((error) => console.log(error));
+			.then((data) => {
+				console.log(data);
 
-		// await fetch("http://127.0.0.1:8000/api/nhanvien", {
-		// 	method: "PUT",
-		// 	headers: {
-		// 		Accept: "application/json",
-		// 		"Content-Type": "application/json",
-		// 		Authorization: `Bearer ${token}`,
-		// 	},
-		// 	body: JSON.stringify(dataInfo),
-		// })
-		// 	.then((data) => console.log(data))
-		// 	.catch((err) => console.log(err));
+				Swal.fire({
+					title: "Sửa thông tin thành công",
+					icon: "success",
+					showConfirmButton: false,
+					padding: "2rem 0 3rem 0",
+					timer: 2000,
+					customClass: {
+						title: "alert__title",
+					},
+				});
+			})
+			.catch((error) => console.log(error));
 	};
 
 	return (

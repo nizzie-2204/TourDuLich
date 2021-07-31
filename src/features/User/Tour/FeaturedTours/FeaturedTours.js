@@ -1,13 +1,12 @@
-import React from "react";
-import "./style.scss";
-import TourList from "../TourList/TourList";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { getFeaturedTours, getTours } from "../TourSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { unwrapResult } from "@reduxjs/toolkit";
 import { css } from "@emotion/react";
+import { unwrapResult } from "@reduxjs/toolkit";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import TourList from "../TourList/TourList";
+import { getFeaturedTours } from "../TourSlice";
+import "./style.scss";
 
 const override = css`
 	display: block;

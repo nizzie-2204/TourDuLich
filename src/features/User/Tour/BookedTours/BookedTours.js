@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import BookedTour from "../BookedTour/BookedTour";
-import SidebarUser from "../../../../components/User/SidebarUser/SidebarUser";
-import "./style.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { getBookedTours, getSupportExpense } from "../TourSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import SidebarUser from "../../../../components/User/SidebarUser/SidebarUser";
+import BookedTour from "../BookedTour/BookedTour";
+import { getBookedTours, getSupportExpense } from "../TourSlice";
+import "./style.scss";
 
 const BookedTours = () => {
 	const dispatch = useDispatch();

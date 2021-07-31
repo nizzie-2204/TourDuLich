@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { changeUserPassword } from "../../../../Auth/authSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const schema = yup.object().shape({
 	password: yup
@@ -27,6 +29,7 @@ const ChangePasswordForm = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm({
 		resolver: yupResolver(schema),
 	});
@@ -36,7 +39,9 @@ const ChangePasswordForm = () => {
 
 		const token = localStorage.getItem("userToken");
 		const { password } = data;
-		const { nv_diachi, nv_gioitinh, nv_namsinh, nv_sdt, nv_ten } = user;
+		const { nv_diachi, nv_gioitinh, nv_sdt, nv_ten } = user;
+		const nv_namsinh = user.nv_namsinh.toString();
+
 		const dataUser = {
 			password,
 			nv_diachi,
@@ -48,7 +53,24 @@ const ChangePasswordForm = () => {
 
 		const action = changeUserPassword({ dataUser, token });
 		dispatch(action)
-			.then((user) => console.log(user))
+			.then(unwrapResult)
+			.then((user) => {
+				console.log(user);
+
+				Swal.fire({
+					title: "Đổi mật khẩu thành công",
+					icon: "success",
+					showConfirmButton: false,
+					padding: "2rem 0 3rem 0",
+					timer: 2000,
+					customClass: {
+						title: "alert__title",
+					},
+				});
+
+				// Reset form
+				reset();
+			})
 			.catch((error) => console.log(error));
 	};
 

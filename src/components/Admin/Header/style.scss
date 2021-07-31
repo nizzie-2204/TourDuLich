@@ -1,0 +1,64 @@
+// @import "../../../scss/reset";
+
+.header-admin {
+	height: 70px;
+	display: flex;
+	background-color: white;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px;
+	font-size: 16px;
+
+	.header__left > i {
+		cursor: pointer;
+		display: none;
+		font-size: 20px;
+		margin-left: 15px;
+	}
+
+	.header__right {
+		position: relative;
+	}
+
+	.header__right--info {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+	}
+
+	.header__right--info-icon {
+		margin: 0 50px 0 0;
+		font-size: 20px;
+	}
+
+	.header__right--info > div {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+	}
+
+	.header__right--info > div > * {
+		margin: 0 20px 0 0;
+	}
+
+	.header__right--dropmenu {
+		width: 150px;
+		background-color: white;
+		position: absolute;
+		top: 46px;
+		right: 0;
+		border: 1px solid #eee;
+		// box-shadow: 0 3px 12px rgb(0 0 0 / 5%);
+		border-radius: 5px;
+		z-index: 9999;
+	}
+
+	.header__right--dropmenu > a > div {
+		margin: 20px 0;
+		padding: 5px 20px;
+	}
+
+	.header__right--dropmenu > a > div:hover {
+		background-color: rgba(87, 89, 98, 0.1);
+	}
+}

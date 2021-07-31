@@ -25,8 +25,13 @@ export const getUserInfo = createAsyncThunk(
 
 export const editUserInfo = createAsyncThunk(
 	"auth/editUserInfo",
-	async ({ data, token }) => {
+	async ({ data, token }, thunkAPI) => {
 		const userInfo = await userAPI.editInfo(data, token);
+
+		if (userInfo) {
+			thunkAPI.dispatch(getUserInfo(token));
+		}
+
 		return userInfo.data;
 	}
 );

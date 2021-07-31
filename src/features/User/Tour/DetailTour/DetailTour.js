@@ -1,24 +1,23 @@
-import React, { useState } from "react";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
-import "./style.scss";
-import { useHistory, useParams } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { bookTour, getSupportExpense, getTour } from "../TourSlice";
 import { css } from "@emotion/react";
-import ClipLoader from "react-spinners/ClipLoader";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { unwrapResult } from "@reduxjs/toolkit";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import { useHistory, useParams } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+import Swal from "sweetalert2";
+import * as yup from "yup";
 import {
 	checkValidDateTour,
 	formatDate,
 	formatPrice,
 	totalPrice,
 } from "../../../../utils/common";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-import Swal from "sweetalert2";
+import { bookTour, getSupportExpense, getTour } from "../TourSlice";
+import "./style.scss";
 
 const override = css`
 	display: block;

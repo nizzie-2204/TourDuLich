@@ -1,47 +1,19 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Route, Redirect } from "react-router-dom";
-import FadeLoader from "react-spinners/FadeLoader";
-import { css } from "@emotion/react";
-import { getUserInfo } from "../../../features/Auth/authSlice";
-import { unwrapResult } from "@reduxjs/toolkit";
-
-const override = css`
-	display: block;
-	text-align: center;
-	margin: 28rem auto;
-`;
+import React from "react";
+import { useSelector } from "react-redux";
+import { Redirect, Route, useHistory } from "react-router-dom";
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
 	const user = useSelector((state) => state.auth.user);
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-	const authLoading = useSelector((state) => state.auth.authLoading);
-	const dispatch = useDispatch();
+	const history = useHistory();
 
-	// useEffect(() => {
-	// 	const getInfo = async () => {
-	// 		const token = localStorage.getItem("userToken");
-
-	// 		if (token) {
-	// 			const action = getUserInfo(token);
-	// 			dispatch(action)
-	// 				.then(unwrapResult)
-	// 				.catch((error) => console.log(error));
-	// 		}
-	// 	};
-
-	// 	getInfo();
-	// }, []);
+	console.log(isAuthenticated);
 
 	return (
 		<Route
 			{...rest}
 			render={(props) => {
-				return isAuthenticated && user ? (
-					<Component {...props} />
-				) : (
-					<Redirect to="/" />
-				);
+				return isAuthenticated ? <Component {...props} /> : history.g;
 			}}
 		/>
 	);

@@ -40,7 +40,6 @@ const AllTour = () => {
 				dispatch(action)
 					.then(unwrapResult)
 					.then((data) => {
-						console.log(data);
 						setPages(Math.ceil(data?.total / data?.per_page));
 					})
 					.catch((error) => console.log(error));

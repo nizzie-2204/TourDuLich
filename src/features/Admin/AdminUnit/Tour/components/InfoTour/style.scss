@@ -1,0 +1,137 @@
+.tours-moreinfo {
+	margin: 30px 0;
+	font-size: 16px;
+
+	button {
+		padding: 5px;
+		width: 70px;
+		height: 30px;
+		background-color: #59d05d;
+		border: 1px solid #59d05d;
+		cursor: pointer;
+		border-radius: 4px;
+		opacity: 0.9;
+	}
+}
+
+.tours-moreinfo > h3 {
+	border-top: 1px solid #eee;
+	padding: 20px 0;
+}
+
+.tours-moreinfo__panel {
+	display: flex;
+	justify-content: space-between;
+}
+
+.tours-moreinfo__panel--imgs {
+	flex: 0.3;
+	display: flex;
+	flex-direction: column;
+}
+
+.selected-img {
+	width: 400px;
+	height: 400px;
+	margin-bottom: 10px;
+	border: 1px solid #a1a3a8;
+	padding: 10px;
+}
+
+.selected-img > img {
+	display: block;
+	width: 100%;
+	margin: auto;
+}
+
+.tours-moreinfo__panel--imgs > .list-imgs {
+	display: flex;
+	justify-content: space-between;
+	width: 400px;
+	height: 100px;
+}
+
+.tours-moreinfo__panel--imgs > .list-imgs > img {
+	cursor: pointer;
+	width: 90px;
+	height: 90px;
+	padding: 2px;
+}
+
+.selected-img__active {
+	border: 1px solid #a1a3a8;
+	border-radius: 5px;
+}
+
+.update-imgs {
+	display: flex;
+	align-items: center;
+}
+
+.update-imgs > button {
+	background-color: #1d7af3;
+	width: 140px;
+	height: 40px;
+}
+
+.tours-moreinfo__panel--details {
+	flex: 0.65;
+	display: flex;
+	flex-direction: column;
+}
+
+.tours-moreinfo__panel--details > div {
+	display: flex;
+	align-items: center;
+	margin-bottom: 30px;
+}
+
+.tours-moreinfo__panel--details > div > label {
+	flex: 0.3;
+}
+
+.tours-moreinfo__panel--details > div > div {
+	display: flex;
+	flex: 0.7;
+}
+
+.tours-moreinfo__panel--details > div > div > .money {
+	width: 240px;
+}
+
+.tours-moreinfo__panel--details > div > div > input {
+	width: 300px;
+	height: 30px;
+	padding: 10px;
+}
+
+.tours-moreinfo__panel--details > div > div > select {
+	cursor: pointer;
+	height: 30px;
+	width: 300px;
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	outline: none;
+}
+
+.tours-moreinfo__panel--details > div > div > select:focus {
+	border-color: #1d7af3;
+	// box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}
+
+.tours-moreinfo__panel--details > div > div > button {
+	margin-right: 6px;
+	width: 95px;
+	height: 50px;
+	align-items: center;
+}
+
+.tours-moreinfo__panel--details > div > div > button[cancel="true"] {
+	background-color: #ff646d;
+	border: 1px solid #ff646d;
+}
+
+textarea {
+	resize: vertical;
+	padding: 10px;
+}

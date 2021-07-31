@@ -1,0 +1,59 @@
+.add-nhanvien {
+	border-top: 1px solid #eee;
+	padding-top: 20px;
+	margin: 10px;
+	margin-top: 20px;
+	font-size: 16px;
+
+	button {
+		padding: 5px;
+		width: 70px;
+		height: 30px;
+		background-color: #59d05d;
+		border: 1px solid #59d05d;
+		cursor: pointer;
+		border-radius: 4px;
+		opacity: 0.9;
+	}
+}
+
+.add-nhanvien > h3 {
+	padding-bottom: 20px;
+}
+
+.form-add-nhanvien {
+	display: flex;
+	flex-direction: column;
+}
+
+.form-add-nhanvien__group {
+	margin: 10px;
+}
+
+.form-add-nhanvien__group > label > i {
+	color: red;
+}
+
+.form-add-nhanvien__group > label > .button-red {
+	width: 100px;
+}
+
+.form-add-nhanvien__group > input {
+	height: 30px;
+	width: 200px;
+	padding: 10px;
+}
+
+.form-add-nhanvien__group > select {
+	cursor: pointer;
+	height: 30px;
+	width: 100px;
+	border: 1px solid #ced4da;
+	border-radius: 5px;
+	outline: none;
+}
+
+.form-add-nhanvien__group > select:focus {
+	border-color: #1d7af3;
+	// box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%);
+}

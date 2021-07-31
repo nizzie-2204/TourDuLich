@@ -1,3 +1,4 @@
+import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
@@ -13,10 +14,12 @@ const Header = () => {
 		const token = localStorage.getItem("userToken");
 
 		const action = logout(token);
-		dispatch(action).then(() => {
-			localStorage.removeItem("userToken");
-			history.push("/login");
-		});
+		dispatch(action)
+			.then(unwrapResult)
+			.then(() => {
+				localStorage.removeItem("userToken");
+				history.push("/login");
+			});
 	};
 
 	return (

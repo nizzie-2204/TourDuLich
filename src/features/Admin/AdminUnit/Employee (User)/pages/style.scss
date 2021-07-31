@@ -1,0 +1,43 @@
+.panel {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: calc(100% - 260px);
+	height: 100vh;
+	margin-left: 260px;
+
+	input {
+		border: 1px solid #ced4da;
+		border-radius: 5px;
+		outline: none;
+	}
+}
+
+.main {
+	padding: 25px;
+	position: relative;
+	background-color: #f2f3f8;
+}
+
+.main > h4 {
+	font-size: 24px;
+}
+
+.main__container {
+	padding: 30px;
+	margin-top: 25px;
+}
+
+.nhanvien-main {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+}
+
+.nhanvien-main > table > tbody > tr > td {
+	width: 10%;
+}
+
+.nhanvien__button-del.button-red {
+	width: 50px;
+}
