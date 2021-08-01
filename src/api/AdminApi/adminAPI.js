@@ -1,4 +1,3 @@
-import { method } from "lodash";
 import axiosClient from "../Axios/axios";
 
 const adminAPI = {
@@ -70,14 +69,18 @@ const adminAPI = {
 		});
 	},
 
-	editUnit: async (name, id) => {
+	editUnit: async (unit) => {
+		const name = { dv_ten: unit.dv_ten };
+
 		return await axiosClient({
 			method: "put",
-			url: `/adminsystem/donvi/${id}`,
+			url: `/adminsystem/donvi/${unit.id}`,
 			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
-			body: JSON.stringify(name),
+			data: JSON.stringify(name),
 		});
 	},
 };

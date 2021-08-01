@@ -5,7 +5,7 @@ import AuthReducer from "../features/Auth/authSlice";
 import TourReducer from "../features/User/Tour/TourSlice";
 import AdminAuthReducer from "../features/Auth/adminAuthSlice";
 import UnitReducer from "../features/Admin/AdminSystem/Unit/unitSlice";
-
+import AdminTourReducer from "../features/Admin/AdminUnit/Tour/tourSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -19,6 +19,7 @@ const rootReducer = combineReducers({
 	tour: TourReducer,
 	adminAuth: AdminAuthReducer,
 	unit: UnitReducer,
+	adminTour: AdminTourReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

@@ -1,7 +1,12 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUnit, getUnits } from "../../unitSlice";
+import {
+	deleteUnit,
+	getUnit,
+	getUnits,
+	setSelectedUnit,
+} from "../../unitSlice";
 import "./style.scss";
 
 const TableUnit = () => {
@@ -14,7 +19,6 @@ const TableUnit = () => {
 			const action = getUnits();
 			dispatch(action)
 				.then(unwrapResult)
-				.then((data) => console.log(data))
 				.catch((error) => console.log(error));
 		};
 
@@ -28,13 +32,14 @@ const TableUnit = () => {
 			.catch((error) => console.log(error));
 	};
 
-	const handleEditUnit = () => {
-		// const action = deleteUnit()
-		// dispatch(action).then(unwrapResult).catch(error => console.log(error))
+	const handleSelectUnit = (unit) => {
+		const action = getUnit(unit.id);
+		dispatch(action);
 	};
 
 	return (
 		<div class="donvi-table">
+			<h3>Các đơn vị hiện tại</h3>
 			<table>
 				<thead>
 					<th>Mã đơn vị</th>
@@ -50,8 +55,16 @@ const TableUnit = () => {
 								<td>{unit.dv_ten}</td>
 
 								<td class="donvi__more-info">
-									<button type="button">Sửa</button>
 									<button
+										type="button"
+										onClick={() => {
+											handleSelectUnit(unit);
+										}}
+									>
+										Sửa
+									</button>
+									<button
+										className="donvi_xoa"
 										type="button"
 										onClick={() => {
 											handleDeleteUnit(unit.id);

@@ -14,7 +14,6 @@ const TableDeletedUnit = () => {
 			const action = getDeletedUnits();
 			dispatch(action)
 				.then(unwrapResult)
-				.then((data) => console.log(data))
 				.catch((error) => console.log(error));
 		};
 
@@ -27,7 +26,7 @@ const TableDeletedUnit = () => {
 			.then(unwrapResult)
 			.then(() => {
 				Swal.fire({
-					title: "Khôi phục vị thành công",
+					title: "Khôi phục đơn vị thành công",
 					icon: "success",
 					showConfirmButton: false,
 					padding: "2rem 0 3rem 0",
@@ -36,12 +35,14 @@ const TableDeletedUnit = () => {
 						title: "alert__title",
 					},
 				});
+				console.log("Restored");
 			})
 			.catch((error) => console.log(error));
 	};
 
 	return (
 		<div class="donvi-table">
+			<h3>Các đơn vị đã xóa</h3>
 			<table>
 				<thead>
 					<th>Mã đơn vị</th>
@@ -57,7 +58,8 @@ const TableDeletedUnit = () => {
 								<td>{unit.dv_ten}</td>
 								<td class="donvi__more-info">
 									<button
-										onClick={handleRestoreDeletedUnit(unit.id)}
+										className="donvi_khoiphuc"
+										// onClick={handleRestoreDeletedUnit(unit.id)}
 										type="button"
 										style={{ width: "75px" }}
 									>

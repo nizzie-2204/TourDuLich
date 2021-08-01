@@ -1,7 +1,38 @@
 import React from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 import "./style.scss";
 
 const InfoTour = () => {
+	const user = useSelector((state) => state.auth.user);
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm();
+
+	const [mulFiles, setMulFiles] = useState([]);
+
+	const handleOnChangePictures = (e) => {
+		const files = e.target.files;
+
+		const arrFiles = Array.from(files)?.map((file) => {
+			return file.name;
+		});
+
+		setMulFiles(arrFiles);
+	};
+
+	const handleAddTour = (data, e) => {
+		e.preventDefault();
+
+		console.log(data);
+		console.log(mulFiles);
+	};
+
 	return (
 		<div class="tours-moreinfo">
 			<h3>Thông tin chi tiết</h3>
@@ -16,58 +47,111 @@ const InfoTour = () => {
 						<img class="" src="../asset/3.png" alt="" />
 						<img class="" src="../asset/4.png" alt="" />
 					</div>
-					<form class="update-imgs" method="">
+					<form class="update-imgs">
 						<input type="file" name="" id="" accept=".jpg, .jpeg, .png" />
 						<button type="submit">Update Selected Picture</button>
 					</form>
 				</div>
-				<form class="tours-moreinfo__panel--details">
+				<form
+					class="tours-moreinfo__panel--details"
+					onSubmit={handleSubmit(handleAddTour)}
+				>
 					<div>
 						<label for="">Tên tour: </label>
 						<div>
-							<input type="text" value="Đà Lạt 3 ngày 2 đêm" disabled />
+							<input
+								{...register("name", { require: true })}
+								type="text"
+								defaultValue=""
+							/>
 						</div>
 					</div>
+
 					<div>
-						<label for="">Địa Điểm: </label>
+						<label for="">Số lượng: </label>
 						<div>
-							<input type="text" value="Thành phố Đà Lạt" disabled />
+							<input
+								{...register("quantity", {
+									require: true,
+									valueAsNumber: true,
+								})}
+								type="text"
+								defaultValue=""
+							/>
 						</div>
 					</div>
+
+					{/* <div>
+						<label for="">Id tour: </label>
+						<div>
+							<input
+								{...register("id", { require: true })}
+								type="date"
+								value="2021-12-01"
+								disabled
+							/>
+						</div>
+					</div> */}
+
 					<div>
 						<label for="">Ngày bắt đầu tour: </label>
 						<div>
-							<input type="date" value="2021-12-01" disabled />
+							<input
+								{...register("startDate", { require: true })}
+								type="date"
+								defaultValue=""
+							/>
+						</div>
+					</div>
+					<div>
+						<label for="">Ngày kết thúc tour: </label>
+						<div>
+							<input
+								{...register("endDate", { require: true })}
+								type="date"
+								defaultValue=""
+							/>
 						</div>
 					</div>
 					<div>
 						<label for="">Ngày mở đăng ký: </label>
 						<div>
-							<input type="date" value="2021-07-01" disabled />
+							<input
+								{...register("startBookDate", { require: true })}
+								type="date"
+								defaultValue=""
+							/>
 						</div>
 					</div>
 					<div>
 						<label for="">Ngày kết thúc đăng ký: </label>
 						<div>
-							<input type="date" value="2021-08-01" disabled />
+							<input
+								{...register("endBookDate", { require: true })}
+								type="date"
+								defaultValue=""
+							/>
 						</div>
 					</div>
 					<div>
 						<label for="">Đơn vị quản lý: </label>
 						<div>
-							<select name="" id="" disabled>
-								<option value="1">Đơn vị A</option>
-								<option value="2" selected>
-									Đơn vị B
-								</option>
-								<option value="3">Đơn vị C</option>
-							</select>
+							<input
+								{...register("unit", { require: true })}
+								type="text"
+								value={user.donvi.dv_ten}
+							/>
 						</div>
 					</div>
 					<div>
 						<label for="">Giá tour: </label>
 						<div>
-							<input class="money" type="text" value="200,000" disabled />
+							<input
+								{...register("price", { require: true })}
+								class="money"
+								type="text"
+								defaultValue=""
+							/>
 							<span style={{ marginLeft: "20px", fontWeight: "bold" }}>
 								VNĐ
 							</span>
@@ -76,23 +160,32 @@ const InfoTour = () => {
 					<div>
 						<label for="">Mô tả: </label>
 						<div>
-							{/* <textarea name="" id="" cols="37" rows="15" disabled>
-								Belief, Lorem Ipsum is not simply random text. It has roots in a
-								piece of classical Latin literature from 45 BC, making it over
-								2000 years old. Richard McClintock, a Latin professor at
-								Hampden-Sydney College in Virginia, looked up one of the more
-								obscure Latin words, consectetur, from a Lorem Ipsum passage,
-								and going through the
-							</textarea> */}
+							<textarea
+								{...register("desc", { require: true })}
+								cols="37"
+								rows="15"
+							></textarea>
+						</div>
+					</div>
+					<div>
+						<label for="">Hình tour: </label>
+						<div>
+							<input
+								{...register("images")}
+								type="file"
+								id="files"
+								name="files"
+								multiple
+								onChange={handleOnChangePictures}
+								accept=".jpg, .jpeg, .png"
+							/>
 						</div>
 					</div>
 					<div>
 						<label for=""></label>
 						<div>
 							<button type="button">Thay đổi thông tin</button>
-							<button type="submit" disabled>
-								Xác nhận
-							</button>
+							<button type="submit">Xác nhận</button>
 							<button type="button" cancel="true" disabled>
 								Hủy
 							</button>
