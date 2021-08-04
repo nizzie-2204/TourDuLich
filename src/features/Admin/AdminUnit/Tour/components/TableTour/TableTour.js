@@ -1,12 +1,13 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTour, getBookedTour, getTours } from "../../tourSlice";
+import { deleteTour, getBookedTour, getTour, getTours } from "../../tourSlice";
 import "./style.scss";
 
 const TableTour = () => {
 	const dispatch = useDispatch();
 	const tours = useSelector((state) => state.adminTour.tours);
+	const user = useSelector((state) => state.auth.user);
 
 	useEffect(() => {
 		const fetchTours = () => {
@@ -20,8 +21,19 @@ const TableTour = () => {
 		fetchTours();
 	}, []);
 
+	const filteredTours = tours?.filter((tour) => {
+		return tour.donvi.id === user.donvi.id;
+	});
+
+	console.log(filteredTours);
+
 	const handleDeleteTour = (id) => {
 		const action = deleteTour(id);
+		dispatch(action);
+	};
+
+	const handleGetTour = (id) => {
+		const action = getTour(id);
 		dispatch(action);
 	};
 
@@ -37,8 +49,8 @@ const TableTour = () => {
 					<th>Số lượng người đăng ký</th>
 					<th>Hành động</th>
 				</thead>
-				{tours &&
-					tours.map((tour) => {
+				{filteredTours &&
+					filteredTours?.map((tour) => {
 						return (
 							<tr className={tour.id}>
 								<td>{tour.t_ten}</td>
@@ -54,7 +66,14 @@ const TableTour = () => {
 									</span>
 								</td>
 								<td style={{ textAlign: "center " }}>
-									<button style={{ marginBottom: "5px" }}>Sửa </button>
+									<button
+										onClick={() => {
+											handleGetTour(tour.id);
+										}}
+										style={{ marginBottom: "5px" }}
+									>
+										Sửa{" "}
+									</button>
 									<button
 										onClick={() => {
 											handleDeleteTour(tour.id);

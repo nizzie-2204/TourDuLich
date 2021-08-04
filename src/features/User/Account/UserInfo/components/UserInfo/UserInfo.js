@@ -161,7 +161,7 @@ const UserInfo = () => {
 									{...register("sex")}
 									type="radio"
 									id="man"
-									checked={user?.nv_gioitinh === "F"}
+									checked={user?.nv_gioitinh === "M"}
 									value="M"
 								/>
 							</div>

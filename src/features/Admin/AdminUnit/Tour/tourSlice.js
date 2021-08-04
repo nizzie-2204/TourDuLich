@@ -1,8 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import adminUnitAPI from "../../../../api/AdminApi/adminUnitAPI";
+import tourAPI from "../../../../api/Tour/tourApi";
 
 export const getTours = createAsyncThunk("adminTour/getTours", async () => {
 	const result = await adminUnitAPI.getAllTour();
+
+	return result.data;
+});
+
+export const getTour = createAsyncThunk("adminTour/getTour", async (id) => {
+	const result = await tourAPI.getTour(id);
 
 	return result.data;
 });
@@ -20,11 +27,16 @@ export const deleteTour = createAsyncThunk(
 	}
 );
 
-export const addTour = createAsyncThunk("adminTour/addTour", async (tour) => {
-	const result = await adminUnitAPI.addTour(tour);
+export const addTour = createAsyncThunk(
+	"adminTour/addTour",
+	async (tour, thunkAPI) => {
+		const result = await adminUnitAPI.addTour(tour);
 
-	return result.data;
-});
+		thunkAPI.dispatch(getTours());
+
+		return result.data;
+	}
+);
 
 export const restoreDeletedTour = createAsyncThunk(
 	"adminTour/restoreDeletedTour",
@@ -97,18 +109,32 @@ const tourSlice = createSlice({
 		tour: null,
 		tourLoading: false,
 	},
-	reducers: {},
+	reducers: {
+		cancelGetTour: (state) => {
+			state.touLoading = false;
+			state.tour = null;
+		},
+	},
 	extraReducers: {
 		[getTours.pending]: (state) => {
-			state.tourLoading = true;
+			state.toursLoading = true;
 		},
 
 		[getTours.fulfilled]: (state, action) => {
-			state.tourLoading = false;
+			state.toursLoading = false;
 			state.tours = action.payload;
+		},
+
+		[getTour.pending]: (state) => {
+			state.tourLoading = true;
+		},
+
+		[getTour.fulfilled]: (state, action) => {
+			state.touLoading = false;
+			state.tour = action.payload.tour;
 		},
 	},
 });
 
-export const {} = tourSlice.actions;
+export const { cancelGetTour } = tourSlice.actions;
 export default tourSlice.reducer;

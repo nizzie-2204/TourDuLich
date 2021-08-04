@@ -14,6 +14,22 @@
 	}
 }
 
+.carousel-tour-imgs {
+	margin-top: 410px;
+	max-width: 360px;
+	flex: 0.3;
+}
+
+.carousel .slide img {
+	// width: 322.86px !important;
+	// height: 266.28px !important;
+}
+
+.carousel .thumb img {
+	// width: 70px !important;
+	// height: 56px !important;
+}
+
 .tours-moreinfo > h3 {
 	border-top: 1px solid #eee;
 	padding: 20px 0;
@@ -28,6 +44,7 @@
 	flex: 0.3;
 	display: flex;
 	flex-direction: column;
+	margin-top: 230px;
 }
 
 .selected-img {

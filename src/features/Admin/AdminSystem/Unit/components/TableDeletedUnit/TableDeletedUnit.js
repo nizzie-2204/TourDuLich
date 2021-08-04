@@ -12,9 +12,7 @@ const TableDeletedUnit = () => {
 	useEffect(() => {
 		const fetchDeletedUnits = () => {
 			const action = getDeletedUnits();
-			dispatch(action)
-				.then(unwrapResult)
-				.catch((error) => console.log(error));
+			dispatch(action);
 		};
 
 		fetchDeletedUnits();
@@ -59,7 +57,7 @@ const TableDeletedUnit = () => {
 								<td class="donvi__more-info">
 									<button
 										className="donvi_khoiphuc"
-										// onClick={handleRestoreDeletedUnit(unit.id)}
+										onClick={handleRestoreDeletedUnit(unit.id)}
 										type="button"
 										style={{ width: "75px" }}
 									>

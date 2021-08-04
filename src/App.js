@@ -7,6 +7,7 @@ import "./App.css";
 import AdminUnit from "./features/Admin/AdminSystem/Unit/pages/Main";
 import AdminTour from "./features/Admin/AdminUnit/Tour/pages/Main";
 import AdminEmployee from "./features/Admin/AdminUnit/Employee (User)/pages/Main";
+import AdminExpense from "./features/Admin/AdminUnit/Expense/pages/Main";
 
 // USER
 import PublicRoute from "./components/User/PublicRoute/PublicRoute";
@@ -49,6 +50,11 @@ function App() {
 								component={AdminEmployee}
 							/>
 							<PrivateRoute exact path="/admin/tour" component={AdminTour} />
+							<PrivateRoute
+								exact
+								path="/admin/expense"
+								component={AdminExpense}
+							/>
 						</Switch>
 					</Router>
 				</PersistGate>

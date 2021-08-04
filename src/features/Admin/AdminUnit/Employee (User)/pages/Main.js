@@ -7,6 +7,7 @@ import SearchEmployee from "../components/SearchEmployee/SearchEmployee";
 import TableEmployee from "../components/TableEmployee/TableEmployee";
 import AddEmployee from "../components/AddEmployee/AddEmployee";
 import InfoEmployee from "../components/InfoEmployee/InfoEmployee";
+import TableDeletedEmployee from "../components/TableDeletedEmployee/TableDeletedEmployee";
 
 import "./style.scss";
 
@@ -20,10 +21,11 @@ const Main = () => {
 				<div className="main">
 					<h4>Quản lý nhân viên</h4>
 					<div className="main__container nhanvien-main">
-						<SearchEmployee />
+						{/* <SearchEmployee /> */}
 						<TableEmployee />
-						<AddEmployee />
+						{/* <AddEmployee /> */}
 						<InfoEmployee />
+						<TableDeletedEmployee />
 					</div>
 				</div>
 

@@ -15,17 +15,22 @@ const adminUnitAPI = {
 	addTour: async (tour) => {
 		let formData = new FormData();
 
-		// formData.append("t_ten", dataForm.name);
-		// formData.append("t_soluong", dataForm.phone);
-		// formData.append("t_mota", dataForm.yearOfBirth);
-		// formData.append("t_tgbatdaudk", dataForm.sex);
-		// formData.append("t_tgketthucdk", dataForm.address);
-		// formData.append("t_ngaybatdau", dataForm.idTour);
+		const t_gia = parseInt(tour.price);
+		const dv_id = parseInt(tour.dv_id);
 
-		// formData.append("t_ngayketthuc", dataForm.idTour);
-		// formData.append("t_gia", dataForm.idTour);
-		// formData.append("dv_id", dataForm.idTour);
-		// formData.append("images", dataForm.idTour);
+		formData.append("t_ten", tour.name);
+		formData.append("t_soluong", tour.quantity);
+		formData.append("t_mota", tour.desc);
+		formData.append("t_tgbatdaudk", tour.startBookDate);
+		formData.append("t_tgketthucdk", tour.endBookDate);
+		formData.append("t_ngaybatdau", tour.startDate);
+
+		formData.append("t_ngayketthuc", tour.endBookDate);
+		formData.append("t_gia", t_gia);
+		formData.append("dv_id", dv_id);
+		tour.images.forEach((img) => formData.append("images[]", img));
+
+		console.log(formData.get("images[]"));
 
 		return await axiosClient({
 			method: "post",
@@ -139,21 +144,22 @@ const adminUnitAPI = {
 	},
 
 	// Employee
-	addEmployee: async () => {
+	addEmployee: async (data) => {
 		let formData = new FormData();
 
-		// formData.append("nv_ten", dataForm.name);
-		// formData.append("nv_namsinh", dataForm.phone);
-		// formData.append("nv_diachi", dataForm.yearOfBirth);
-		// formData.append("nv_thoigianvaolam", dataForm.sex);
-		// formData.append("nv_sdt", dataForm.address);
-		// formData.append("nv_gioitinh", dataForm.idTour);
+		console.log(data);
 
-		// formData.append("dv_id", dataForm.idTour);
-		// formData.append("ltk_id", dataForm.idTour);
+		formData.append("nv_ten", data.nv_ten);
+		formData.append("nv_namsinh", data.nv_namsinh);
+		formData.append("nv_diachi", data.nv_diachi);
+		formData.append("nv_thoigianvaolam", data.nv_thoigianvaolam);
+		formData.append("nv_sdt", data.nv_sdt);
+		formData.append("nv_gioitinh", data.nv_gioitinh);
+		formData.append("dv_id", data.dv_id);
+		formData.append("ltk_id", data.ltk_id);
 
 		return await axiosClient({
-			method: "get",
+			method: "post",
 			url: "/admin/nhanvien",
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
@@ -192,7 +198,7 @@ const adminUnitAPI = {
 		});
 	},
 
-	getDeletedEmployees: async (id) => {
+	getDeletedEmployees: async () => {
 		return await axiosClient({
 			method: "get",
 			url: `/admin/history/nhanvien`,
@@ -212,23 +218,27 @@ const adminUnitAPI = {
 		});
 	},
 
-	editEmployee: async (id) => {
-		let formData = new FormData();
+	editEmployee: async ({ data, id }) => {
+		const dataForm = {
+			nv_namsinh: data.nv_namsinh.toString(),
+			nv_diachi: data.nv_diachi,
+			nv_sdt: data.nv_sdt.toString(),
+			nv_gioitinh: data.nv_gioitinh,
+			nv_ten: data.nv_ten,
+		};
 
-		// formData.append("nv_ten", dataForm.name);
-		// formData.append("nv_namsinh", dataForm.phone);
-		// formData.append("nv_diachi", dataForm.yearOfBirth);
-		// formData.append("nv_sdt", dataForm.address);
-		// formData.append("nv_gioitinh", dataForm.address);
-		// formData.append("dv_id", dataForm.address);
+		console.log(JSON.stringify(dataForm));
+		console.log(id);
 
 		return await axiosClient({
 			method: "put",
 			url: `/admin/nhanvien/${id}`,
 			headers: {
+				Accept: "application/json",
+				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
-			data: formData,
+			data: JSON.stringify(dataForm),
 		});
 	},
 
@@ -243,18 +253,17 @@ const adminUnitAPI = {
 		});
 	},
 
-	addSupportExpense: async () => {
+	addSupportExpense: async (data) => {
 		let formData = new FormData();
 
-		// formData.append("tuthamnien", dataForm.name);
-		// formData.append("denthamnien", dataForm.phone);
-		// formData.append("sotienhotro", dataForm.yearOfBirth);
-		// formData.append("diengiai", dataForm.address);
-		// formData.append("tunam", dataForm.address);
-		// formData.append("dennam", dataForm.address);
+		formData.append("tuthamnien", data.seniorityFrom);
+		formData.append("denthamnien", data.seniorityTo);
+		formData.append("sotienhotro", data.supportExpense);
+		formData.append("diengiai", data.desc);
+
 		return await axiosClient({
 			method: "post",
-			url: `/admin/donvi/kinhphi`,
+			url: `/admin/donvi/kinhphi/${parseInt(data.period)}`,
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
@@ -262,21 +271,21 @@ const adminUnitAPI = {
 		});
 	},
 
-	editSupportExpense: async () => {
-		let formData = new FormData();
-
-		// formData.append("tuthamnien", dataForm.name);
-		// formData.append("denthamnien", dataForm.phone);
-		// formData.append("sotienhotro", dataForm.yearOfBirth);
-		// formData.append("diengiai", dataForm.address);
+	editSupportExpense: async (data) => {
+		const dataForm = {
+			tuthamnien: data.data.seniorityFrom,
+			denthamnien: data.data.seniorityTo,
+			sotienhotro: data.data.supportExpense,
+			diengiai: data.data.desc,
+		};
 
 		return await axiosClient({
 			method: "put",
-			url: `/admin/donvi/kinhphi`,
+			url: `/admin/donvi/kinhphi/${data.id}`,
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
-			data: formData,
+			data: dataForm,
 		});
 	},
 
@@ -299,13 +308,19 @@ const adminUnitAPI = {
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
 		});
+
+		// return await axiosClient.get("/admin/donvi/giaidoan", {
+		// 	headers: {
+		// 		Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+		// 	},
+		// });
 	},
 
-	addPeriod: async () => {
+	addPeriod: async (data) => {
 		let formData = new FormData();
 
-		// formData.append("tunam", dataForm.name);
-		// formData.append("dennam", dataForm.phone);
+		formData.append("gd_tunam", data.from);
+		formData.append("gd_dennam", data.to);
 
 		return await axiosClient({
 			method: "post",
@@ -317,21 +332,17 @@ const adminUnitAPI = {
 		});
 	},
 
-	editPeriod: async (id) => {
-		let formData = new FormData();
-
-		// formData.append("tuthamnien", dataForm.name);
-		// formData.append("denthamnien", dataForm.phone);
-		// formData.append("sotienhotro", dataForm.phone);
-		// formData.append("diengiai", dataForm.phone);
-
+	editPeriod: async (data) => {
 		return await axiosClient({
-			method: "post",
-			url: `/admin/donvi/giaidoan/${id}`,
+			method: "put",
+			url: `/admin/donvi/giaidoan/${data.id}`,
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
-			data: formData,
+			data: {
+				gd_tunam: data.data.from.toString(),
+				gd_dennam: data.data.to.toString(),
+			},
 		});
 	},
 

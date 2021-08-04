@@ -62,6 +62,12 @@ const SidebarAdmin = () => {
 					</div>
 					<span>Tours</span>
 				</NavLink>
+				<NavLink to="/admin/expense" activeClassName="active">
+					<div className="icon">
+						<ion-icon name="cash-outline"></ion-icon>
+					</div>
+					<span>Kinh phí</span>
+				</NavLink>
 			</div>
 		</div>
 	);

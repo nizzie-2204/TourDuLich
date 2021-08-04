@@ -41,8 +41,6 @@ export const deleteUnit = createAsyncThunk(
 		thunkAPI.dispatch(getUnits());
 		thunkAPI.dispatch(getDeletedUnits());
 
-		console.log(result.data);
-
 		return result.data;
 	}
 );
@@ -50,11 +48,12 @@ export const deleteUnit = createAsyncThunk(
 export const restoreDeletedUnit = createAsyncThunk(
 	"unit/restoreDeletedUnit",
 	async (id, thunkAPI) => {
-		// const result = await adminAPI.restoreDeletedUnit(id);
-		// console.log(result);
-		// // thunkAPI.dispatch(getUnits());
-		// // thunkAPI.dispatch(getDeletedUnits());
-		// return result.data;
+		const result = await adminAPI.restoreDeletedUnit(id);
+
+		thunkAPI.dispatch(getUnits());
+		thunkAPI.dispatch(getDeletedUnits());
+
+		return result.data;
 	}
 );
 

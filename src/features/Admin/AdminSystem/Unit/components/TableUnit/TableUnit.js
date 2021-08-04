@@ -8,6 +8,7 @@ import {
 	setSelectedUnit,
 } from "../../unitSlice";
 import "./style.scss";
+import Swal from "sweetalert2";
 
 const TableUnit = () => {
 	const dispatch = useDispatch();
@@ -29,6 +30,19 @@ const TableUnit = () => {
 		const action = deleteUnit(id);
 		dispatch(action)
 			.then(unwrapResult)
+			.then(() => {
+				Swal.fire({
+					title: "Xóa đơn vị thành công",
+					icon: "success",
+					showConfirmButton: false,
+					padding: "2rem 0 3rem 0",
+					timer: 2000,
+					customClass: {
+						title: "alert__title",
+					},
+				});
+				console.log("Restored");
+			})
 			.catch((error) => console.log(error));
 	};
 
