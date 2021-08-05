@@ -19,9 +19,8 @@ export const deleteTour = createAsyncThunk(
 	async (id, thunkAPI) => {
 		const result = await adminUnitAPI.deleteTour(id);
 
-		if (result) {
-			thunkAPI.dispatch(getTours());
-		}
+		thunkAPI.dispatch(getTours());
+		thunkAPI.dispatch(getDeletedTour());
 
 		return result.data;
 	}
@@ -40,8 +39,11 @@ export const addTour = createAsyncThunk(
 
 export const restoreDeletedTour = createAsyncThunk(
 	"adminTour/restoreDeletedTour",
-	async (id) => {
+	async (id, thunkAPI) => {
 		const result = await adminUnitAPI.restoreDeletedTour(id);
+
+		thunkAPI.dispatch(getTours());
+		thunkAPI.dispatch(getDeletedTour());
 
 		return result.data;
 	}
@@ -49,8 +51,8 @@ export const restoreDeletedTour = createAsyncThunk(
 
 export const getDeletedTour = createAsyncThunk(
 	"adminTour/getDeletedTour",
-	async (tour) => {
-		const result = await adminUnitAPI.getDeletedTour(tour);
+	async () => {
+		const result = await adminUnitAPI.getDeletedTour();
 
 		return result.data;
 	}
@@ -76,8 +78,9 @@ export const editTourPicture = createAsyncThunk(
 
 export const addNewPicture = createAsyncThunk(
 	"adminTour/addNewPicture",
-	async (idTour) => {
-		const result = await adminUnitAPI.addNewPicture(idTour);
+	async ({ id, mulFiles }) => {
+		const result = await adminUnitAPI.addNewPicture({ id, mulFiles });
+		console.log(result.data);
 
 		return result.data;
 	}
@@ -85,8 +88,10 @@ export const addNewPicture = createAsyncThunk(
 
 export const editTour = createAsyncThunk(
 	"adminTour/editTour",
-	async (idTour, infoTour) => {
-		const result = await adminUnitAPI.editTour(idTour, infoTour);
+	async ({ data, id }, thunkAPI) => {
+		const result = await adminUnitAPI.editTour({ data, id });
+
+		thunkAPI.dispatch(getTours());
 
 		return result.data;
 	}
@@ -108,6 +113,8 @@ const tourSlice = createSlice({
 		toursLoading: false,
 		tour: null,
 		tourLoading: false,
+		deletedTours: null,
+		deletedToursLoading: false,
 	},
 	reducers: {
 		cancelGetTour: (state) => {
@@ -132,6 +139,15 @@ const tourSlice = createSlice({
 		[getTour.fulfilled]: (state, action) => {
 			state.touLoading = false;
 			state.tour = action.payload.tour;
+		},
+
+		[getDeletedTour.pending]: (state) => {
+			state.deletedToursLoading = true;
+		},
+
+		[getDeletedTour.fulfilled]: (state, action) => {
+			state.deletedToursLoading = false;
+			state.deletedTours = action.payload.tour;
 		},
 	},
 });

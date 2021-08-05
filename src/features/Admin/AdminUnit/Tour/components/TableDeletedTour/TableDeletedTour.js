@@ -1,40 +1,34 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteTour, getBookedTour, getTour, getTours } from "../../tourSlice";
-import "./style.scss";
+import { getDeletedTour, restoreDeletedTour } from "../../tourSlice";
 import Swal from "sweetalert2";
 
-const TableTour = () => {
-	const dispatch = useDispatch();
-	const tours = useSelector((state) => state.adminTour.tours);
+const TableDeletedTour = () => {
+	const deletedTours = useSelector((state) => state.adminTour.deletedTours);
 	const user = useSelector((state) => state.auth.user);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
-		const fetchTours = () => {
-			const action = getTours();
-			dispatch(action)
-				.then(unwrapResult)
-				.then((result) => console.log(result))
-				.catch((error) => console.log(error));
+		const fetchDeletedTours = () => {
+			const action = getDeletedTour();
+			dispatch(action);
 		};
 
-		fetchTours();
+		fetchDeletedTours();
 	}, []);
 
-	const filteredTours = tours?.filter((tour) => {
-		return tour.donvi.id === user.donvi.id;
+	const filteredDeletedTours = deletedTours?.filter((tour) => {
+		return tour?.donvi?.id === user?.donvi?.id;
 	});
 
-	console.log(filteredTours);
-
-	const handleDeleteTour = (id) => {
-		const action = deleteTour(id);
+	const handleRestoreDeletedTour = (id) => {
+		const action = restoreDeletedTour(id);
 		dispatch(action)
 			.then(unwrapResult)
 			.then(() => {
 				Swal.fire({
-					title: "Sửa tour thành công",
+					title: "Khôi phục tour thành công",
 					icon: "success",
 					showConfirmButton: false,
 					padding: "2rem 0 3rem 0",
@@ -46,15 +40,10 @@ const TableTour = () => {
 			});
 	};
 
-	const handleGetTour = (id) => {
-		const action = getTour(id);
-		dispatch(action);
-	};
-
 	return (
 		<div class="tours-table">
 			<h3 style={{ fontSize: "18px", marginBottom: "10px" }}>
-				Tour hiện tại trong đơn vị
+				Tour đã xóa trong đơn vị
 			</h3>
 			<table>
 				<thead>
@@ -66,8 +55,9 @@ const TableTour = () => {
 					<th>Số lượng người đăng ký</th>
 					<th>Hành động</th>
 				</thead>
-				{filteredTours &&
-					filteredTours?.map((tour) => {
+
+				{filteredDeletedTours &&
+					filteredDeletedTours?.map((tour) => {
 						return (
 							<tr className={tour.id}>
 								<td>{tour.t_ten}</td>
@@ -79,24 +69,18 @@ const TableTour = () => {
 								<td>{tour.t_tgketthucdk}</td>
 								<td class="tours__info-more">
 									<span>
-										<b>{tour.dangkytour.length}</b>/{tour.t_soluong}
+										<b>{tour?.dangkytour.length}</b>/{tour.t_soluong}
 									</span>
 								</td>
 								<td style={{ textAlign: "center " }}>
 									<button
+										type="button"
 										onClick={() => {
-											handleGetTour(tour.id);
+											handleRestoreDeletedTour(tour.id);
 										}}
 										style={{ marginBottom: "5px" }}
 									>
-										Sửa{" "}
-									</button>
-									<button
-										onClick={() => {
-											handleDeleteTour(tour.id);
-										}}
-									>
-										Xóa{" "}
+										Khôi phục
 									</button>
 								</td>
 							</tr>
@@ -107,4 +91,4 @@ const TableTour = () => {
 	);
 };
 
-export default TableTour;
+export default TableDeletedTour;

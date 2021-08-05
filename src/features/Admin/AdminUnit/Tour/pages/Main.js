@@ -4,6 +4,7 @@ import Header from "../../../../../components/Admin/Header/Header";
 import SidebarAdmin from "../../../../../components/Admin/SidebarAdmin/SidebarAdmin";
 import TableTour from "../components/TableTour/TableTour";
 import InfoTour from "../components/InfoTour/InfoTour";
+import TableDeletedTour from "../components/TableDeletedTour/TableDeletedTour";
 
 const Main = () => {
 	return (
@@ -17,6 +18,7 @@ const Main = () => {
 					<div className="main__container tours-main">
 						<TableTour />
 						<InfoTour />
+						<TableDeletedTour />
 					</div>
 				</div>
 

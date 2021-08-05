@@ -3,7 +3,13 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { addTour, cancelGetTour, getTour } from "../../tourSlice";
+import {
+	addNewPicture,
+	addTour,
+	cancelGetTour,
+	editTour,
+	getTour,
+} from "../../tourSlice";
 import "./style.scss";
 import Swal from "sweetalert2";
 import { unwrapResult } from "@reduxjs/toolkit";
@@ -25,9 +31,6 @@ const InfoTour = () => {
 			const fetchTours = () => {
 				const action = getTour(tour.id);
 				dispatch(action);
-
-				console.log("fetched tour");
-				console.log(tour);
 			};
 
 			fetchTours();
@@ -46,9 +49,6 @@ const InfoTour = () => {
 		});
 
 		setMulFiles(arrFiles);
-		arrFiles?.forEach((image) => {
-			console.log(image.name);
-		});
 	};
 
 	// End handle select multiple images
@@ -82,9 +82,43 @@ const InfoTour = () => {
 			});
 	};
 
+	const handleEditTour = (data, e) => {
+		e.preventDefault();
+		const id = tour.id;
+
+		console.log(mulFiles);
+
+		const action = addNewPicture({ id, mulFiles });
+		dispatch(action);
+
+		// const action2 = editTour({ data, id });
+		// dispatch(action2)
+		// 	.then(unwrapResult)
+		// 	.then(() => {
+		// 		Swal.fire({
+		// 			title: "Sửa tour thành công",
+		// 			icon: "success",
+		// 			showConfirmButton: false,
+		// 			padding: "2rem 0 3rem 0",
+		// 			timer: 2000,
+		// 			customClass: {
+		// 				title: "alert__title",
+		// 			},
+		// 		});
+
+		// 		const action = cancelGetTour();
+		// 		dispatch(action);
+
+		// 		setMulFiles([]);
+
+		// 		reset();
+		// 	});
+	};
+
 	const handleCancelGetTour = () => {
 		const action = cancelGetTour();
 		dispatch(action);
+		setMulFiles([]);
 	};
 
 	return (
@@ -205,6 +239,7 @@ const InfoTour = () => {
 									{...register("desc", { require: true })}
 									cols="37"
 									rows="15"
+									defaultValue=""
 								></textarea>
 							</div>
 						</div>
@@ -252,7 +287,7 @@ const InfoTour = () => {
 				<div class="tours-moreinfo__panel">
 					<form
 						class="tours-moreinfo__panel--details"
-						onSubmit={handleSubmit(handleAddTour)}
+						onSubmit={handleSubmit(handleEditTour)}
 					>
 						<div>
 							<label for="">Tên tour: </label>
@@ -383,7 +418,7 @@ const InfoTour = () => {
 						<div>
 							<label for=""></label>
 							<div>
-								<button type="button">Thay đổi thông tin</button>
+								{/* <button type="button">Thay đổi thông tin</button> */}
 								<button type="submit">Xác nhận</button>
 								<button
 									type="button"

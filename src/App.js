@@ -44,11 +44,11 @@ function App() {
 							{/* ADMIN */}
 
 							<PrivateRoute exact path="/admin/unit" component={AdminUnit} />
-							<PrivateRoute
+							{/* <PrivateRoute
 								exact
 								path="/admin/employee"
 								component={AdminEmployee}
-							/>
+							/> */}
 							<PrivateRoute exact path="/admin/tour" component={AdminTour} />
 							<PrivateRoute
 								exact

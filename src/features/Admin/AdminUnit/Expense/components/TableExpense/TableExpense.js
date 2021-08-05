@@ -1,8 +1,14 @@
+import { unwrapResult } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getInfoPeriod, setExpense } from "../../expenseSlice";
+import {
+	deleteSupportExpense,
+	getInfoPeriod,
+	setExpense,
+} from "../../expenseSlice";
 import "./style.scss";
+import Swal from "sweetalert2";
 
 const TableExpense = () => {
 	const dispatch = useDispatch();
@@ -31,8 +37,6 @@ const TableExpense = () => {
 		if (selectedPeriod) {
 			setExpenseFromPeriod(selectedPeriod.chitiet);
 		}
-
-		console.log(expenseFromPeriod);
 	};
 
 	const handleEditExpense = (expense) => {
@@ -41,7 +45,22 @@ const TableExpense = () => {
 	};
 
 	const handleDeleteExpense = (id) => {
-		console.log(id);
+		const action = deleteSupportExpense(id);
+		dispatch(action)
+			.then(unwrapResult)
+			.then(() => {
+				setExpenseFromPeriod([]);
+				Swal.fire({
+					title: "Xóa kinh phí hỗ trợ thành công",
+					icon: "success",
+					showConfirmButton: false,
+					padding: "2rem 0 3rem 0",
+					timer: 2000,
+					customClass: {
+						title: "alert__title",
+					},
+				});
+			});
 	};
 
 	return (

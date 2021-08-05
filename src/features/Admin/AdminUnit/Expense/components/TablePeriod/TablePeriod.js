@@ -27,8 +27,6 @@ const SearchExpense = () => {
 		return item.dv_id === user.donvi.id;
 	});
 
-	console.log(filteredPeriod);
-
 	const handleSetPeriod = (period) => {
 		const action = setPeriod(period);
 		dispatch(action);

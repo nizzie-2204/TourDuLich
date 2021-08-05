@@ -19,7 +19,7 @@ const Main = () => {
 				<div className="main">
 					<h4>Quản lý kinh phí</h4>
 					<div className="main__container donvi-main ">
-						{/* <TablePeriod /> */}
+						<TablePeriod />
 						{/* <AddPeriod /> */}
 						<TableExpense />
 						<AddExpense />

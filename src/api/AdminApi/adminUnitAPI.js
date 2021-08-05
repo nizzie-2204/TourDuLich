@@ -85,24 +85,16 @@ const adminUnitAPI = {
 		});
 	},
 
-	addNewPicture: async (idTour) => {
+	addNewPicture: async ({ id, mulFiles }) => {
 		let formData = new FormData();
 
-		// formData.append("t_ten", dataForm.name);
-		// formData.append("t_soluong", dataForm.phone);
-		// formData.append("t_mota", dataForm.yearOfBirth);
-		// formData.append("t_tgbatdaudk", dataForm.sex);
-		// formData.append("t_tgketthucdk", dataForm.address);
-		// formData.append("t_ngaybatdau", dataForm.idTour);
+		mulFiles.forEach((file) => formData.append("images[]", file));
 
-		// formData.append("t_ngayketthuc", dataForm.idTour);
-		// formData.append("t_gia", dataForm.idTour);
-		// formData.append("dv_id", dataForm.idTour);
-		// formData.append("images", dataForm.idTour);
+		console.log(...formData);
 
 		return await axiosClient({
 			method: "post",
-			url: `/admin/tour/${idTour}`,
+			url: `/admin/tour/${id}`,
 			headers: {
 				"Content-Type": "multipart/form-data",
 
@@ -112,14 +104,26 @@ const adminUnitAPI = {
 		});
 	},
 
-	editTour: async (idTour, infoTour) => {
+	editTour: async (data) => {
+		const dataForm = {
+			t_ten: data.data.name,
+			t_soluong: data.data.quantity.toString(),
+			t_mota: data.data.desc,
+			t_tgbatdaudk: data.data.startBookDate,
+			t_tgketthucdk: data.data.endBookDate,
+			t_ngaybatdau: data.data.startDate,
+			t_ngayketthuc: data.data.endDate,
+			t_gia: data.data.price,
+		};
+
 		return await axiosClient({
 			method: "put",
-			url: `/admin/tour/${idTour}`,
+			url: `/admin/tour/${data.id}`,
 			headers: {
+				"Content-Type": "application/json",
 				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
 			},
-			data: JSON.stringify(infoTour),
+			data: dataForm,
 		});
 	},
 

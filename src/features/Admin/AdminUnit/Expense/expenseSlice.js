@@ -64,9 +64,9 @@ export const editSupportExpense = createAsyncThunk(
 export const deleteSupportExpense = createAsyncThunk(
 	"adminExpense/deleteSupportExpense",
 	async (id, thunkAPI) => {
-		// const result = await adminUnitAPI.deleteSupportExpense(id);
-		// thunkAPI.dispatch(getInfoPeriod());
-		// return result.data;
+		const result = await adminUnitAPI.deleteSupportExpense(id);
+		thunkAPI.dispatch(getInfoPeriod());
+		return result.data;
 	}
 );
 
