@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDeletedUnits, restoreDeletedUnit } from "../../unitSlice";
 import Swal from "sweetalert2";
+import "./style.scss";
 
 const TableDeletedUnit = () => {
 	const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const TableDeletedUnit = () => {
 	};
 
 	return (
-		<div class="donvi-table">
+		<div class="donvi-deleted-table">
 			<h3>Các đơn vị đã xóa</h3>
 			<table>
 				<thead>
@@ -57,7 +58,9 @@ const TableDeletedUnit = () => {
 								<td class="donvi__more-info">
 									<button
 										className="donvi_khoiphuc"
-										onClick={handleRestoreDeletedUnit(unit.id)}
+										onClick={() => {
+											handleRestoreDeletedUnit(unit.id);
+										}}
 										type="button"
 										style={{ width: "75px" }}
 									>

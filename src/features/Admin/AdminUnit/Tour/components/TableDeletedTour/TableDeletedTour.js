@@ -43,7 +43,7 @@ const TableDeletedTour = () => {
 	return (
 		<div class="tours-table">
 			<h3 style={{ fontSize: "18px", marginBottom: "10px" }}>
-				Tour đã xóa trong đơn vị
+				{user.ltk_id === 1 ? "Tour đã xóa" : "Tour đã xóa trong đơn vị"}
 			</h3>
 			<table>
 				<thead>
@@ -56,7 +56,40 @@ const TableDeletedTour = () => {
 					<th>Hành động</th>
 				</thead>
 
-				{filteredDeletedTours &&
+				{/* Admin system */}
+				{user.ltk_id === 1 &&
+					deletedTours?.map((tour) => {
+						return (
+							<tr className={tour.id}>
+								<td>{tour.t_ten}</td>
+								<td>{tour.t_ngaybatdau}</td>
+								<td class="tours__info-donvi">
+									<a href="">{tour?.donvi?.dv_ten}</a>
+								</td>
+								<td>{tour.t_tgbatdaudk}</td>
+								<td>{tour.t_tgketthucdk}</td>
+								<td class="tours__info-more">
+									<span>
+										<b>{tour?.dangkytour.length}</b>/{tour.t_soluong}
+									</span>
+								</td>
+								<td style={{ textAlign: "center " }}>
+									<button
+										type="button"
+										onClick={() => {
+											handleRestoreDeletedTour(tour.id);
+										}}
+										style={{ marginBottom: "5px" }}
+									>
+										Khôi phục
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+
+				{/* Admin unit */}
+				{user.ltk_id === 2 &&
 					filteredDeletedTours?.map((tour) => {
 						return (
 							<tr className={tour.id}>

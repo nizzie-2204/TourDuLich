@@ -24,7 +24,7 @@ const Main = () => {
 						<TableUnit />
 						<AddUnit />
 						<TableDeletedUnit />
-						<DetailUnit />
+						{/* <DetailUnit /> */}
 					</div>
 				</div>
 

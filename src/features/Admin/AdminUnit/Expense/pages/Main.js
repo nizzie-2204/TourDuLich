@@ -20,7 +20,7 @@ const Main = () => {
 					<h4>Quản lý kinh phí</h4>
 					<div className="main__container donvi-main ">
 						<TablePeriod />
-						{/* <AddPeriod /> */}
+						<AddPeriod />
 						<TableExpense />
 						<AddExpense />
 					</div>

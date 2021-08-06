@@ -8,12 +8,10 @@ const Tour = ({ tour }) => {
 		<Link to={`/tour/${tour?.id}`} className="tour">
 			<div to={`/tour/${tour?.id}`} className="tour__img">
 				<img
-					src={
-						tour?.hinhtour[0]?.ht_path &&
-						require(`../../../../assets/images/${tour?.hinhtour[0]?.ht_path?.slice(
-							-11
-						)}`).default
-					}
+					src={`http://localhost:8000/storage/images/${tour?.hinhtour[0]?.ht_path?.substr(
+						81
+					)}`}
+					alt="tour"
 					alt={tour?.t_ten}
 				/>
 			</div>

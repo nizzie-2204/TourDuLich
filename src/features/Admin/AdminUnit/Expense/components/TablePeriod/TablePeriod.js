@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { deletePeriod, getInfoPeriod, setPeriod } from "../../expenseSlice";
 import "./style.scss";
 import Swal from "sweetalert2";
+import { getUnits } from "../../../../AdminSystem/Unit/unitSlice";
 
 const SearchExpense = () => {
 	const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const SearchExpense = () => {
 
 	// Filter periods
 	const filteredPeriod = periods?.filter((item) => {
-		return item.dv_id === user.donvi.id;
+		return item.ltk_id === 3;
 	});
 
 	const handleSetPeriod = (period) => {
@@ -53,7 +54,9 @@ const SearchExpense = () => {
 	return (
 		<div class="period-table">
 			<h3 style={{ fontSize: "18px", marginBottom: "10px" }}>
-				Các giai đoạn hỗ trợ kinh phí trong đơn vị
+				{user.ltk_id === 2
+					? "	Các giai đoạn hỗ trợ kinh phí trong đơn vị	"
+					: "Các giai đoạn hỗ trợ kinh phí"}
 			</h3>
 			<table>
 				<thead>
@@ -63,7 +66,40 @@ const SearchExpense = () => {
 					<th>Mã đơn vị</th>
 					<th>Sửa/Xóa</th>
 				</thead>
-				{filteredPeriod &&
+
+				{/* Admin system */}
+				{user.ltk_id === 1 &&
+					periods?.map((item) => {
+						return (
+							<tr className={item.id}>
+								<td>{item.id}</td>
+								<td>{item.gd_tunam}</td>
+								<td>{item.gd_dennam}</td>
+								<td>{item.dv_id}</td>
+								<td>
+									<button
+										type="button"
+										onClick={() => {
+											handleSetPeriod(item);
+										}}
+									>
+										Sửa
+									</button>
+									<button
+										type="button"
+										onClick={() => {
+											handleDeletePeriodInTable(item.id);
+										}}
+									>
+										Xóa
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+
+				{/* Admin unit */}
+				{user.ltk_id === 2 &&
 					filteredPeriod.map((item) => {
 						return (
 							<tr className={item.id}>

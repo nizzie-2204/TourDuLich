@@ -22,10 +22,12 @@ const TableTour = () => {
 		fetchTours();
 	}, []);
 
-	const filteredTours = tours?.filter((tour) => {
-		return tour.donvi.id === user.donvi.id;
-	});
-
+	let filteredTours;
+	if (user.donvi) {
+		filteredTours = tours?.filter((tour) => {
+			return tour.donvi.id === user.donvi.id;
+		});
+	}
 	console.log(filteredTours);
 
 	const handleDeleteTour = (id) => {
@@ -66,7 +68,47 @@ const TableTour = () => {
 					<th>Số lượng người đăng ký</th>
 					<th>Hành động</th>
 				</thead>
-				{filteredTours &&
+
+				{/* Admin system */}
+				{user.ltk_id === 1 &&
+					tours?.map((tour) => {
+						return (
+							<tr className={tour.id}>
+								<td>{tour.t_ten}</td>
+								<td>{tour.t_ngaybatdau}</td>
+								<td class="tours__info-donvi">
+									<a href="">{tour?.donvi?.dv_ten}</a>
+								</td>
+								<td>{tour.t_tgbatdaudk}</td>
+								<td>{tour.t_tgketthucdk}</td>
+								<td class="tours__info-more">
+									<span>
+										<b>{tour.dangkytour.length}</b>/{tour.t_soluong}
+									</span>
+								</td>
+								<td style={{ textAlign: "center " }}>
+									<button
+										onClick={() => {
+											handleGetTour(tour.id);
+										}}
+										style={{ marginBottom: "5px" }}
+									>
+										Sửa{" "}
+									</button>
+									<button
+										onClick={() => {
+											handleDeleteTour(tour.id);
+										}}
+									>
+										Xóa{" "}
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+
+				{/* Admin unit */}
+				{user.ltk_id === 2 &&
 					filteredTours?.map((tour) => {
 						return (
 							<tr className={tour.id}>

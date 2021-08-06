@@ -15,9 +15,6 @@ const adminUnitAPI = {
 	addTour: async (tour) => {
 		let formData = new FormData();
 
-		const t_gia = parseInt(tour.price);
-		const dv_id = parseInt(tour.dv_id);
-
 		formData.append("t_ten", tour.name);
 		formData.append("t_soluong", tour.quantity);
 		formData.append("t_mota", tour.desc);
@@ -26,11 +23,9 @@ const adminUnitAPI = {
 		formData.append("t_ngaybatdau", tour.startDate);
 
 		formData.append("t_ngayketthuc", tour.endBookDate);
-		formData.append("t_gia", t_gia);
-		formData.append("dv_id", dv_id);
+		formData.append("t_gia", parseInt(tour.price));
+		formData.append("dv_id", parseInt(tour.dv_id));
 		tour.images.forEach((img) => formData.append("images[]", img));
-
-		console.log(formData.get("images[]"));
 
 		return await axiosClient({
 			method: "post",
@@ -88,9 +83,16 @@ const adminUnitAPI = {
 	addNewPicture: async ({ id, mulFiles }) => {
 		let formData = new FormData();
 
-		mulFiles.forEach((file) => formData.append("images[]", file));
+		console.log(mulFiles);
+		mulFiles.forEach((file) => {
+			console.log(file.name);
+			if (file.name && typeof file.name === "string") {
+				formData.append("images[]", file);
+				console.log("them dc hinh");
+			}
+		});
 
-		console.log(...formData);
+		console.log(formData.get("images[]"));
 
 		return await axiosClient({
 			method: "post",
@@ -114,7 +116,10 @@ const adminUnitAPI = {
 			t_ngaybatdau: data.data.startDate,
 			t_ngayketthuc: data.data.endDate,
 			t_gia: data.data.price,
+			dv_id: parseInt(data.data.dv_id),
 		};
+
+		console.log(dataForm);
 
 		return await axiosClient({
 			method: "put",
@@ -159,8 +164,8 @@ const adminUnitAPI = {
 		formData.append("nv_thoigianvaolam", data.nv_thoigianvaolam);
 		formData.append("nv_sdt", data.nv_sdt);
 		formData.append("nv_gioitinh", data.nv_gioitinh);
-		formData.append("dv_id", data.dv_id);
-		formData.append("ltk_id", data.ltk_id);
+		formData.append("dv_id", parseInt(data.dv_id));
+		formData.append("ltk_id", parseInt(data.ltk_id));
 
 		return await axiosClient({
 			method: "post",
@@ -229,10 +234,10 @@ const adminUnitAPI = {
 			nv_sdt: data.nv_sdt.toString(),
 			nv_gioitinh: data.nv_gioitinh,
 			nv_ten: data.nv_ten,
+			dv_id: parseInt(data.dv_id),
 		};
 
-		console.log(JSON.stringify(dataForm));
-		console.log(id);
+		console.log(dataForm);
 
 		return await axiosClient({
 			method: "put",
@@ -325,6 +330,9 @@ const adminUnitAPI = {
 
 		formData.append("gd_tunam", data.from);
 		formData.append("gd_dennam", data.to);
+		formData.append("dv_id", parseInt(data.dv_id));
+
+		console.log(...formData);
 
 		return await axiosClient({
 			method: "post",
@@ -337,6 +345,11 @@ const adminUnitAPI = {
 	},
 
 	editPeriod: async (data) => {
+		let dv_id;
+		if (data.data.dv_id) {
+			dv_id = parseInt(data.data.dv_id);
+		}
+
 		return await axiosClient({
 			method: "put",
 			url: `/admin/donvi/giaidoan/${data.id}`,
@@ -346,6 +359,7 @@ const adminUnitAPI = {
 			data: {
 				gd_tunam: data.data.from.toString(),
 				gd_dennam: data.data.to.toString(),
+				dv_id: dv_id,
 			},
 		});
 	},

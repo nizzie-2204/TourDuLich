@@ -84,7 +84,12 @@ const employeeSlice = createSlice({
 		deletedEmployees: null,
 		deletedEmployeesLoading: false,
 	},
-	reducers: {},
+	reducers: {
+		unsetEmployee: (state) => {
+			state.employee = null;
+			state.employeeLoading = false;
+		},
+	},
 	extraReducers: {
 		[getEmployees.pending]: (state) => {
 			state.employeesLoading = true;
@@ -101,7 +106,7 @@ const employeeSlice = createSlice({
 
 		[getDeletedEmployees.fulfilled]: (state, action) => {
 			state.deletedEmployeesLoading = false;
-			state.deletedEmployees = action.payload;
+			state.deletedEmployees = action.payload.nhanvien;
 		},
 
 		[getEmployee.pending]: (state) => {
@@ -119,5 +124,5 @@ const employeeSlice = createSlice({
 	},
 });
 
-export const {} = employeeSlice.actions;
+export const { unsetEmployee } = employeeSlice.actions;
 export default employeeSlice.reducer;

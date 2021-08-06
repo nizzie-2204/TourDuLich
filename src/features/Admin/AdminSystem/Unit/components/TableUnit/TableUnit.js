@@ -41,7 +41,6 @@ const TableUnit = () => {
 						title: "alert__title",
 					},
 				});
-				console.log("Restored");
 			})
 			.catch((error) => console.log(error));
 	};

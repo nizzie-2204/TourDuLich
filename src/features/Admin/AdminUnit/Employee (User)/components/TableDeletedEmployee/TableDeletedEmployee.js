@@ -9,6 +9,8 @@ import "./style.scss";
 import Swal from "sweetalert2";
 
 const TableEmployee = () => {
+	const user = useSelector((state) => state.auth.user);
+
 	useEffect(() => {
 		const fetchDeletedEmployees = () => {
 			const action = getDeletedEmployees();
@@ -59,8 +61,36 @@ const TableEmployee = () => {
 					<th>Thông tin liên lạc</th>
 					<th>Chỉnh sửa thông tin</th>
 				</thead>
+				{/* Admin system */}
 
-				{filteredEmployees &&
+				{user.ltk_id === 1 &&
+					deletedEmployees?.map((employee) => {
+						return (
+							<tr key={employee.id}>
+								<td>{employee.id}</td>
+								<td>{employee.nv_ten}</td>
+								<td>
+									<span>{employee.nv_thoigianvaolam}</span>
+								</td>
+								{/* <td>{employee.donvi.dv_ten}</td> */}
+								<td>{employee.username}</td>
+								<td>{employee.nv_sdt}</td>
+								<td>
+									<button
+										type="button"
+										onClick={() => {
+											handleRestoreDeleteEmployee(employee.id);
+										}}
+									>
+										Khôi phục
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+
+				{/* Admin unit */}
+				{user.ltk_id === 2 &&
 					filteredEmployees?.map((employee) => {
 						return (
 							<tr key={employee.id}>

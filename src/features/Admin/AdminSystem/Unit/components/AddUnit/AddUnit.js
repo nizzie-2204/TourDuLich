@@ -112,7 +112,9 @@ const AddUnit = () => {
 							type="text"
 							{...register("nameUnit", { required: true })}
 						/>
-						<button type="submit">Xác nhận</button>
+						<button type="submit" style={{ width: "100px", height: "40px" }}>
+							Xác nhận
+						</button>
 					</div>
 				)}
 			</form>
