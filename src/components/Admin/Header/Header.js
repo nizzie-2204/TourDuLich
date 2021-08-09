@@ -11,12 +11,16 @@ const Header = () => {
 
 	const handleLogout = () => {
 		// const token =
-		const token = localStorage.getItem("adminToken");
+		const token =
+			localStorage.getItem("adminSystemToken") ||
+			localStorage.getItem("adminUnitToken");
+
 		const action = logout(token);
 		dispatch(action)
 			.then(unwrapResult)
 			.then(() => {
-				localStorage.removeItem("adminToken");
+				localStorage.removeItem("adminSystemToken");
+				localStorage.removeItem("adminUnitToken");
 				history.push("/login");
 			});
 	};

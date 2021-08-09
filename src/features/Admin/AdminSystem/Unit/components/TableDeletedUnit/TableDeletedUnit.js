@@ -62,7 +62,6 @@ const TableDeletedUnit = () => {
 											handleRestoreDeletedUnit(unit.id);
 										}}
 										type="button"
-										style={{ width: "75px" }}
 									>
 										Khôi phục
 									</button>

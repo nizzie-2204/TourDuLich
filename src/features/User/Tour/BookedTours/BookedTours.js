@@ -9,36 +9,40 @@ import "./style.scss";
 const BookedTours = () => {
 	const dispatch = useDispatch();
 	const bookedTours = useSelector((state) => state.tour.bookedTours);
+	const user = useSelector((state) => state.auth.user);
 	const [supportExpense, setSupportExpense] = useState(null);
 
 	useEffect(() => {
-		const fetchBookedTours = () => {
-			const token = localStorage.getItem("userToken");
+		if (localStorage.getItem("userToken") && user) {
+			const fetchBookedTours = () => {
+				const token = localStorage.getItem("userToken");
 
-			const action = getBookedTours(token);
-			dispatch(action)
-				.then(unwrapResult)
+				const action = getBookedTours(token);
+				dispatch(action)
+					.then(unwrapResult)
 
-				.catch((error) => console.log(error));
-		};
+					.catch((error) => console.log(error));
+			};
 
-		fetchBookedTours();
+			fetchBookedTours();
+		}
 	}, []);
 
 	useEffect(() => {
-		const fetchSupportExpense = () => {
-			const token = localStorage.getItem("userToken");
-			const action = getSupportExpense(token);
+		if (localStorage.getItem("userToken")) {
+			const fetchSupportExpense = () => {
+				const token = localStorage.getItem("userToken");
+				const action = getSupportExpense(token);
 
-			dispatch(action)
-				.then(unwrapResult)
-				.then((result) => {
-					setSupportExpense(result?.sotienhotro);
-				})
-				.catch((error) => console.log(error));
-		};
-
-		fetchSupportExpense();
+				dispatch(action)
+					.then(unwrapResult)
+					.then((result) => {
+						setSupportExpense(result?.sotienhotro);
+					})
+					.catch((error) => console.log(error));
+			};
+			fetchSupportExpense();
+		}
 	}, []);
 
 	return (
@@ -48,7 +52,7 @@ const BookedTours = () => {
 					<SidebarUser />
 					<div className="booked-tours__list">
 						<h3 className="booked-tours__title">
-							{bookedTours.length > 0
+							{bookedTours.length > 0 || bookedTours !== null
 								? "Các tour đã đặt"
 								: "Bạn chưa đặt tour nào"}
 						</h3>

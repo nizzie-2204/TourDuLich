@@ -41,7 +41,7 @@ function App() {
 
 							<Route exact restricted path="/login" component={Login} />
 							<PublicRoute exact path="/tours" component={AllTour} />
-							<PublicRoute path="/tours?page=" component={AllTour} />
+							<PublicRoute exact path="/tours?page=:id" component={AllTour} />
 							<PublicRoute path="/tour/:id" component={DetailTourPage} />
 
 							<PrivateRoute path="/account" component={Account} />

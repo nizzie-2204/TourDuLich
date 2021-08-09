@@ -13,7 +13,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 		<Route
 			{...rest}
 			render={(props) => {
-				return isAuthenticated ? <Component {...props} /> : history.g;
+				return user ? <Component {...props} /> : <Redirect to="/" />;
 			}}
 		/>
 	);

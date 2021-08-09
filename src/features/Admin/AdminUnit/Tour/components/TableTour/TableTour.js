@@ -25,7 +25,7 @@ const TableTour = () => {
 	let filteredTours;
 	if (user.donvi) {
 		filteredTours = tours?.filter((tour) => {
-			return tour.donvi.id === user.donvi.id;
+			return tour?.donvi?.id === user?.donvi?.id;
 		});
 	}
 	console.log(filteredTours);
@@ -86,21 +86,22 @@ const TableTour = () => {
 										<b>{tour.dangkytour.length}</b>/{tour.t_soluong}
 									</span>
 								</td>
-								<td style={{ textAlign: "center " }}>
+								<td class="tour__more-info">
 									<button
 										onClick={() => {
 											handleGetTour(tour.id);
 										}}
 										style={{ marginBottom: "5px" }}
 									>
-										Sửa{" "}
+										Sửa
 									</button>
 									<button
 										onClick={() => {
 											handleDeleteTour(tour.id);
 										}}
+										className="button-red"
 									>
-										Xóa{" "}
+										Xóa
 									</button>
 								</td>
 							</tr>

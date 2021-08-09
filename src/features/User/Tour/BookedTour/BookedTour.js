@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { cancelTour } from "../TourSlice";
+import Swal from "sweetalert2";
 
 const BookedTour = ({ tour, supportExpense }) => {
 	const bookedTours = useSelector((state) => state.tour.bookedTours);
@@ -17,7 +18,18 @@ const BookedTour = ({ tour, supportExpense }) => {
 		const action = cancelTour({ id, token });
 		dispatch(action)
 			.then(unwrapResult)
-			.then((message) => console.log(message))
+			.then((message) => {
+				Swal.fire({
+					title: "Hủy đăng ký tour thành công",
+					icon: "success",
+					showConfirmButton: false,
+					padding: "2rem 0 3rem 0",
+					timer: 2000,
+					customClass: {
+						title: "alert__title",
+					},
+				});
+			})
 			.catch((error) => console.log(error));
 	};
 

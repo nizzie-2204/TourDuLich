@@ -1,5 +1,17 @@
 .table-employee {
 	font-size: 16px;
+	table-layout: fixed;
+	padding: 10px;
+	display: block;
+	max-height: 500px;
+	overflow: scroll;
+	width: 100%;
+
+	.employee__more-info {
+		display: flex;
+		justify-content: space-between;
+		// margin-right: 60px;
+	}
 
 	button {
 		padding: 5px;
@@ -10,15 +22,7 @@
 		cursor: pointer;
 		border-radius: 4px;
 		opacity: 0.9;
-	}
-
-	table {
-		table-layout: fixed;
-		padding: 10px;
-		display: block;
-		max-height: 500px;
-		overflow: scroll;
-		width: 100%;
+		margin-right: 5px;
 	}
 
 	th,

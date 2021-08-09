@@ -2,7 +2,7 @@ import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { addUnit, editUnit, getUnit } from "../../unitSlice";
+import { addUnit, editUnit, getUnit, unsetUnit } from "../../unitSlice";
 import "./style.scss";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
@@ -87,23 +87,32 @@ const AddUnit = () => {
 			});
 	};
 
+	const handleUnsetUnit = () => {
+		const action = unsetUnit();
+		dispatch(action);
+	};
+
 	return (
-		<div class="donvi-add">
+		<div className="donvi-add">
 			{unit ? <h3>Sửa đơn vị</h3> : <h3>Thêm đơn vị mới</h3>}
 			<form
 				onSubmit={
 					unit ? handleSubmit(handleEditUnit) : handleSubmit(handleAddUnit)
 				}
 			>
-				<label for="">Tên đơn vị: </label>
+				<label htmlFor="">Tên đơn vị: </label>
 				{unit ? (
 					<div>
 						<input
+							id="nameUnit"
 							type="text"
 							{...register("nameUnit", { required: true })}
 							defaultValue={unit.dv_ten}
 						/>
 						<button type="submit">Sửa</button>
+						<button type="button" onClick={handleUnsetUnit}>
+							Hủy
+						</button>
 					</div>
 				) : (
 					<div>
@@ -112,9 +121,7 @@ const AddUnit = () => {
 							type="text"
 							{...register("nameUnit", { required: true })}
 						/>
-						<button type="submit" style={{ width: "100px", height: "40px" }}>
-							Xác nhận
-						</button>
+						<button type="submit">Xác nhận</button>
 					</div>
 				)}
 			</form>

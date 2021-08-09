@@ -66,16 +66,16 @@ const Header = () => {
 						<li className="header__link">
 							<Link to="/">TRANG CHỦ</Link>
 						</li>
-						<li className="header__link">
+						{/* <li className="header__link">
 							<Link to="/">GIỚI THIỆU</Link>
-						</li>
+						</li> */}
 						<li className="header__link">
 							<Link to="/tours">TOUR DU LỊCH</Link>
 						</li>
 						<li className="header__link">
 							<Link to="/account">TÀI KHOẢN</Link>
 						</li>
-						<li className="header__link">
+						{/* <li className="header__link">
 							<Link to="/">TIN TỨC</Link>
 						</li>
 						<li className="header__link">
@@ -86,7 +86,7 @@ const Header = () => {
 						</li>
 						<li className="header__link">
 							<Link to="/">LIÊN HỆ</Link>
-						</li>
+						</li> */}
 					</div>
 				</div>
 			</div>

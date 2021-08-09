@@ -79,7 +79,7 @@ const TableDeletedTour = () => {
 										onClick={() => {
 											handleRestoreDeletedTour(tour.id);
 										}}
-										style={{ marginBottom: "5px" }}
+										style={{ marginBottom: "5px", width: "90px" }}
 									>
 										Khôi phục
 									</button>

@@ -104,7 +104,7 @@ const AddExpense = () => {
 									type="text"
 									defaultValue=""
 									minLength="1"
-									maxLength="1"
+									maxLength="2"
 								/>
 							</div>
 						</div>
@@ -119,7 +119,7 @@ const AddExpense = () => {
 									type="text"
 									defaultValue=""
 									minLength="1"
-									maxLength="1"
+									maxLength="2"
 								/>
 							</div>
 						</div>
@@ -186,7 +186,7 @@ const AddExpense = () => {
 									type="text"
 									defaultValue={expense.ctgdhotro_tuthamnien}
 									minLength="1"
-									maxLength="1"
+									maxLength="2"
 								/>
 							</div>
 						</div>
@@ -201,7 +201,7 @@ const AddExpense = () => {
 									type="text"
 									defaultValue={expense.ctgdhotro_denthamnien}
 									minLength="1"
-									maxLength="1"
+									maxLength="2"
 								/>
 							</div>
 						</div>
@@ -230,11 +230,12 @@ const AddExpense = () => {
 								/>
 							</div>
 						</div>
-
-						<button type="submit">Xác nhận</button>
-						<button type="button" onClick={handleUnsetExpense}>
-							Hủy
-						</button>
+						<div style={{ display: "flex" }}>
+							<button type="submit">Xác nhận</button>
+							<button type="button" onClick={handleUnsetExpense}>
+								Hủy
+							</button>
+						</div>
 					</form>
 				)}
 			</div>

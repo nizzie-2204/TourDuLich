@@ -81,7 +81,11 @@ const unitSlice = createSlice({
 		unitLoading: false,
 		selectedUnit: null,
 	},
-	reducers: {},
+	reducers: {
+		unsetUnit: (state) => {
+			state.unit = null;
+		},
+	},
 	extraReducers: {
 		[getUnits.pending]: (state) => {
 			state.unitsLoading = true;
@@ -116,5 +120,5 @@ const unitSlice = createSlice({
 	},
 });
 
-export const {} = unitSlice.actions;
+export const { unsetUnit } = unitSlice.actions;
 export default unitSlice.reducer;

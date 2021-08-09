@@ -38,7 +38,7 @@ const InfoEmployee = () => {
 		// if employee changes (when user clicked edit button in TableEmployee component)
 		// => fetchUnit again and change default value of employee  and display it
 		if (employee) {
-			setDv_id(employee.donvi.id);
+			setDv_id(employee?.donvi?.id);
 
 			const fetchUnit = () => {
 				const action = getEmployee(employee.id);
@@ -69,15 +69,17 @@ const InfoEmployee = () => {
 		const action = addEmployee(data);
 		dispatch(action)
 			.then(unwrapResult)
-			.then(() => {
+			.then((result) => {
 				Swal.fire({
 					title: "Thêm nhân viên thành công",
+					text: `Tài khoản: ${result.username}, mật khẩu: ${result.password}`,
 					icon: "success",
 					showConfirmButton: false,
 					padding: "2rem 0 3rem 0",
-					timer: 2000,
+					// timer: 2000,
 					customClass: {
 						title: "alert__title",
+						htmlContainer: "add-nhanvien__text",
 					},
 				});
 
@@ -187,6 +189,14 @@ const InfoEmployee = () => {
 								/>
 							</div>
 							<div class="info__group">
+								<label for="">Mật khẩu: </label>
+								<input
+									defaultValue=""
+									type="password"
+									{...register("password")}
+								/>
+							</div>
+							<div class="info__group">
 								<label for="">Giới tính: </label>
 								<div>
 									<input
@@ -216,11 +226,14 @@ const InfoEmployee = () => {
 								</div>
 							</div>
 
-							<div class="info__group">
+							<div class="info__group" style={{ justifyContent: "flex-start" }}>
 								<label for="">Đơn vị: </label>
 								<select
 									value={dv_id}
-									style={{ padding: "5px 20px" }}
+									style={{
+										padding: "5px 20px",
+										marginLeft: "6px",
+									}}
 									{...register("dv_id")}
 									onChange={handleOnChangeUnit}
 								>
@@ -233,10 +246,10 @@ const InfoEmployee = () => {
 
 							{/* Admin system => add admin unit and employee
 								Admin unit => add  employee */}
-							<div class="info__group">
+							<div class="info__group" style={{ justifyContent: "flex-start" }}>
 								<label for="">Loại tài khoản: </label>
 								<select
-									style={{ padding: "5px 20px" }}
+									style={{ padding: "5px 20px", marginLeft: "6px" }}
 									defaultValue={employee.ltk_id}
 									disabled
 									{...register("ltk_id")}

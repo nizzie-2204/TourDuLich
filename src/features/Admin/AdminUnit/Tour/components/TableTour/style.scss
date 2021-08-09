@@ -3,6 +3,17 @@
 	max-height: 1000px;
 	font-size: 16px;
 
+	.tour__more-info {
+		display: flex;
+
+		button {
+			margin-right: 5px;
+		}
+		span {
+			margin-right: 50px;
+		}
+	}
+
 	button {
 		padding: 5px;
 		width: 70px;
@@ -46,8 +57,8 @@
 	}
 
 	.button-red {
-		background-color: #ff646d;
-		border: 1px solid #ff646d;
+		background-color: #ff646d !important;
+		border: 1px solid #ff646d !important;
 	}
 }
 

@@ -3,16 +3,23 @@ import axiosClient from "../Axios/axios";
 const adminUnitAPI = {
 	// Tour
 	deleteTour: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
 		return await axiosClient({
 			method: "delete",
 			url: `/admin/tour/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	addTour: async (tour) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		let formData = new FormData();
 
 		formData.append("t_ten", tour.name);
@@ -32,58 +39,76 @@ const adminUnitAPI = {
 			url: `/admin/tour/`,
 			headers: {
 				"Content-Type": "multipart/form-data",
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: formData,
 		});
 	},
 
 	restoreDeletedTour: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "put",
 			url: `/admin/history/tour/${id}/restore`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	getDeletedTour: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/history/tour/`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	deleteTourPicture: async (idTour, idPicture) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "delete",
 			url: `/admin/tour/${idTour}/${idPicture}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	editTourPicture: async (idTour, idPicture) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "post",
 			url: `/admin/tour/${idTour}/${idPicture}`,
 			headers: {
 				"Content-Type": "multipart/form-data",
 
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	addNewPicture: async ({ id, mulFiles }) => {
 		let formData = new FormData();
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
 
-		console.log(mulFiles);
 		mulFiles.forEach((file) => {
 			console.log(file.name);
 			if (file.name && typeof file.name === "string") {
@@ -100,7 +125,7 @@ const adminUnitAPI = {
 			headers: {
 				"Content-Type": "multipart/form-data",
 
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: formData,
 		});
@@ -119,6 +144,10 @@ const adminUnitAPI = {
 			dv_id: parseInt(data.data.dv_id),
 		};
 
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		console.log(dataForm);
 
 		return await axiosClient({
@@ -126,18 +155,22 @@ const adminUnitAPI = {
 			url: `/admin/tour/${data.id}`,
 			headers: {
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: dataForm,
 		});
 	},
 
 	getBookedTour: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/donvi/dangkytour`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
@@ -147,7 +180,7 @@ const adminUnitAPI = {
 			method: "get",
 			url: `/tourall`,
 			// headers: {
-			// 	Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+			// 	Authorization: `Bearer ${localStorage.getItem("adminUnitToken")}`,
 			// },
 		});
 	},
@@ -156,7 +189,9 @@ const adminUnitAPI = {
 	addEmployee: async (data) => {
 		let formData = new FormData();
 
-		console.log(data);
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
 
 		formData.append("nv_ten", data.nv_ten);
 		formData.append("nv_namsinh", data.nv_namsinh);
@@ -171,63 +206,87 @@ const adminUnitAPI = {
 			method: "post",
 			url: "/admin/nhanvien",
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: formData,
 		});
 	},
 
 	getEmployees: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: "/admin/nhanvien",
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	getEmployee: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/nhanvien/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	deleteEmployee: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "delete",
 			url: `/admin/nhanvien/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	getDeletedEmployees: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/history/nhanvien`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	restoreDeletedEmployee: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "put",
 			url: `/admin/history/nhanvien/${id}/restore`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	editEmployee: async ({ data, id }) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		const dataForm = {
 			nv_namsinh: data.nv_namsinh.toString(),
 			nv_diachi: data.nv_diachi,
@@ -235,6 +294,7 @@ const adminUnitAPI = {
 			nv_gioitinh: data.nv_gioitinh,
 			nv_ten: data.nv_ten,
 			dv_id: parseInt(data.dv_id),
+			password: data.password,
 		};
 
 		console.log(dataForm);
@@ -245,7 +305,7 @@ const adminUnitAPI = {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: JSON.stringify(dataForm),
 		});
@@ -253,16 +313,24 @@ const adminUnitAPI = {
 
 	// Expense
 	getInfoSupportExpense: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/donvi/kinhphi`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	addSupportExpense: async (data) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		let formData = new FormData();
 
 		formData.append("tuthamnien", data.seniorityFrom);
@@ -274,13 +342,17 @@ const adminUnitAPI = {
 			method: "post",
 			url: `/admin/donvi/kinhphi/${parseInt(data.period)}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: formData,
 		});
 	},
 
 	editSupportExpense: async (data) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		const dataForm = {
 			tuthamnien: data.data.seniorityFrom,
 			denthamnien: data.data.seniorityTo,
@@ -292,40 +364,52 @@ const adminUnitAPI = {
 			method: "put",
 			url: `/admin/donvi/kinhphi/${data.id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: dataForm,
 		});
 	},
 
 	deleteSupportExpense: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "delete",
 			url: `/admin/donvi/kinhphi/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},
 
 	// Expense period
 	getInfoPeriod: async () => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "get",
 			url: `/admin/donvi/giaidoan`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 
 		// return await axiosClient.get("/admin/donvi/giaidoan", {
 		// 	headers: {
-		// 		Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+		// 		Authorization: `Bearer ${localStorage.getItem("adminUnitToken")}`,
 		// 	},
 		// });
 	},
 
 	addPeriod: async (data) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		let formData = new FormData();
 
 		formData.append("gd_tunam", data.from);
@@ -338,7 +422,7 @@ const adminUnitAPI = {
 			method: "post",
 			url: `/admin/donvi/giaidoan`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: formData,
 		});
@@ -349,12 +433,15 @@ const adminUnitAPI = {
 		if (data.data.dv_id) {
 			dv_id = parseInt(data.data.dv_id);
 		}
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
 
 		return await axiosClient({
 			method: "put",
 			url: `/admin/donvi/giaidoan/${data.id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 			data: {
 				gd_tunam: data.data.from.toString(),
@@ -365,11 +452,15 @@ const adminUnitAPI = {
 	},
 
 	deletePeriod: async (id) => {
+		const token =
+			localStorage.getItem("adminUnitToken") ||
+			localStorage.getItem("adminSystemToken");
+
 		return await axiosClient({
 			method: "delete",
 			url: `/admin/donvi/giaidoan/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${token}`,
 			},
 		});
 	},

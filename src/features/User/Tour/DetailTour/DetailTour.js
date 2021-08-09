@@ -51,12 +51,18 @@ const DetailTour = () => {
 	const [supportExpense, setSupportExpense] = useState(null);
 
 	useEffect(() => {
-		const fetchTour = () => {
-			const action = getTour(id);
-			dispatch(action)
-				.then(unwrapResult)
-				.catch((error) => console.log(error));
-		};
+		if (id) {
+			console.log(parseInt(id));
+			const fetchTour = () => {
+				console.log(parseInt(id));
+
+				const action = getTour(parseInt(id));
+				dispatch(action)
+					.then(unwrapResult)
+					.catch((error) => console.log(error));
+			};
+			fetchTour();
+		}
 
 		const fetchSupportExpense = () => {
 			const token = localStorage.getItem("userToken");
@@ -70,7 +76,6 @@ const DetailTour = () => {
 				.catch((error) => console.log(error));
 		};
 
-		fetchTour();
 		fetchSupportExpense();
 	}, []);
 
@@ -90,10 +95,11 @@ const DetailTour = () => {
 			!checkValidDateTour(new Date(), tour?.t_tgbatdaudk, tour?.t_tgketthucdk)
 		) {
 			return;
+		} else if (user?.donvi?.id !== tour?.donvi?.id) {
+			console.log("Khác đơn vị");
 		} else {
 			const idTour = parseInt(id);
 			const dataForm = { ...data, idTour };
-
 			const token = localStorage.getItem("userToken");
 			const action = bookTour({ dataForm, token });
 			dispatch(action)
@@ -109,7 +115,6 @@ const DetailTour = () => {
 							title: "alert__title",
 						},
 					});
-
 					history.push("/booked");
 				})
 				.catch((error) => console.log(error));
@@ -132,11 +137,9 @@ const DetailTour = () => {
 											<div>
 												<img
 													alt="tour"
-													src={
-														require(`../../../../assets/images/${image.ht_path.substr(
-															78
-														)}`).default
-													}
+													src={`http://localhost:8000/storage/images/${image?.ht_path?.substr(
+														86
+													)}`}
 												/>
 											</div>
 										);
@@ -164,171 +167,191 @@ const DetailTour = () => {
 									</>
 								)}
 							</Carousel>
-							<div className="detail-tour__info">
-								<h3 className="detail-tour__name">{tour?.t_ten}</h3>
-								<p className="detail-tour__price">
-									Giá: {formatPrice(tour?.t_gia)}
-								</p>
-								<p className="detail-tour__desc">{tour?.t_mota}</p>
-								<div className="detail-tour__time">
-									<div>
-										Thời gian đăng ký tour:{" "}
-										<span>
-											{formatDate(tour?.t_tgbatdaudk)} -{" "}
-											{formatDate(tour?.t_tgketthucdk)}
-										</span>
-									</div>
-									<div style={{ marginBottom: "2rem" }}>
-										Ngày bắt đầu tour:{" "}
-										<span>{formatDate(tour?.t_ngaybatdau)}</span>
-									</div>
-									<div>
-										Ngày kết thúc tour:{" "}
-										<span>{formatDate(tour?.t_ngayketthuc)}</span>
+
+							{tour && (
+								<div className="detail-tour__info">
+									<h3 className="detail-tour__name">{tour?.t_ten}</h3>
+									<p className="detail-tour__price">
+										Giá: {formatPrice(tour?.t_gia)}
+									</p>
+									<p className="detail-tour__desc">{tour?.t_mota}</p>
+									<div className="detail-tour__time">
+										<div>
+											Thời gian đăng ký tour:
+											<span>
+												{formatDate(tour?.t_tgbatdaudk)} -
+												{formatDate(tour?.t_tgketthucdk)}
+											</span>
+										</div>
+										<div style={{ marginBottom: "2rem" }}>
+											Ngày bắt đầu tour:{" "}
+											<span>{formatDate(tour?.t_ngaybatdau)}</span>
+										</div>
+										<div>
+											Ngày kết thúc tour:{" "}
+											<span>{formatDate(tour?.t_ngayketthuc)}</span>
+										</div>
+										{/* <div style={{ marginTop: "2rem" }}>
+											Đơn vị {tour.donvi.id}:<span>{tour.donvi.dv_ten}</span>
+										</div> */}
 									</div>
 								</div>
-							</div>
+							)}
 						</div>
 
-						{!checkValidDateTour(
-							new Date(),
-							tour?.t_tgbatdaudk,
-							tour?.t_tgketthucdk
-						) ? (
+						{!user ? (
 							<div className="detail-tour__invalid-time">
-								Chưa đến ngày hoặc hết ngày đăng ký tour
+								Đăng nhập để đặt tour
 							</div>
 						) : (
-							<form
-								className="detail-tour__form"
-								onSubmit={handleSubmit(handleBookTour)}
-							>
-								<h3 className="detail-tour__title">Thông tin đăng ký</h3>
-
-								<div className="detail-tour__input">
-									<label htmlFor="name">Họ tên</label>
-									<input
-										type="text"
-										id="name"
-										{...register("name")}
-										defaultValue={user?.nv_ten}
-									/>
-								</div>
-								{/* Error when submitting */}
-								{errors && (
-									<p className="detail-tour__error-input">
-										{errors?.name?.message}
-									</p>
-								)}
-
-								<div className="detail-tour__input">
-									<label htmlFor="address">Địa chỉ</label>
-									<input
-										type="text"
-										id="address"
-										defaultValue={user?.nv_diachi}
-										{...register("address")}
-									/>
-								</div>
-
-								{/* Error when submitting */}
-								{errors && (
-									<p className="detail-tour__error-input">
-										{errors?.address?.message}
-									</p>
-								)}
-								<div className="detail-tour__input">
-									<label htmlFor="yearOfBirth">Năm sinh</label>
-									<input
-										type="text"
-										id="yearOfBirth"
-										defaultValue={user?.nv_namsinh}
-										{...register("yearOfBirth")}
-									/>
-								</div>
-
-								{/* Error when submitting */}
-								{errors && (
-									<p className="detail-tour__error-input">
-										{errors?.yearOfBirth?.message}
-									</p>
-								)}
-								<div className="detail-tour__input">
-									<label htmlFor="phone">Số điện thoại</label>
-									<input
-										type="text"
-										id="phone"
-										defaultValue={user?.nv_sdt}
-										{...register("phone")}
-									/>
-								</div>
-
-								{/* Error when submitting */}
-								{errors && (
-									<p className="detail-tour__error-input">
-										{errors?.phone?.message}
-									</p>
-								)}
-								<div className="detail-tour__input-sex">
-									<span>Giới tính</span>
-
-									<div>
-										<label htmlFor="man">Nam</label>
-										<input
-											{...register("sex")}
-											type="radio"
-											id="man"
-											checked={user?.nv_gioitinh === "F"}
-											value="M"
-										/>
+							[
+								user?.donvi?.id !== tour?.donvi?.id ? (
+									<div className="detail-tour__invalid-time">
+										Không phải tour của đơn vị nhân viên
 									</div>
-									<div>
-										<label htmlFor="woman">Nữ</label>
-										<input
-											{...register("sex")}
-											type="radio"
-											id="woman"
-											checked={user?.nv_gioitinh === "F"}
-											value="F"
-										/>
-									</div>
-								</div>
-
-								<div className="detail-tour__expense">
-									<div className="detail-tour__expense-price">
-										Giá: {formatPrice(tour?.t_gia)}
-									</div>
-									<div className="detail-tour__expense-sp">
-										Phí hỗ trợ: {formatPrice(supportExpense)}
-									</div>
-									<div className="detail-tour__expense-total">
-										Tổng tiền:{" "}
-										{formatPrice(totalPrice(tour?.t_gia, supportExpense))}
-									</div>
-								</div>
-
-								<button
-									type="submit"
-									disabled={
+								) : (
+									[
 										!checkValidDateTour(
 											new Date(),
 											tour?.t_tgbatdaudk,
 											tour?.t_tgketthucdk
-										)
-									}
-									className={
-										!checkValidDateTour(
-											new Date(),
-											tour?.t_tgbatdaudk,
-											tour?.t_tgketthucdk
-										)
-											? "detail-tour__not-allow detail-tour__booking"
-											: "detail-tour__booking"
-									}
-								>
-									Đăng ký tour
-								</button>
-							</form>
+										) ? (
+											<div className="detail-tour__invalid-time">
+												Chưa đến ngày hoặc hết ngày đăng ký tour
+											</div>
+										) : (
+											<form
+												className="detail-tour__form"
+												onSubmit={handleSubmit(handleBookTour)}
+											>
+												<h3 className="detail-tour__title">
+													Thông tin đăng ký
+												</h3>
+
+												<div className="detail-tour__input">
+													<label htmlFor="name">Họ tên</label>
+													<input
+														type="text"
+														id="name"
+														{...register("name")}
+														defaultValue=""
+													/>
+												</div>
+												{errors && (
+													<p className="detail-tour__error-input">
+														{errors?.name?.message}
+													</p>
+												)}
+
+												<div className="detail-tour__input">
+													<label htmlFor="address">Địa chỉ</label>
+													<input
+														type="text"
+														id="address"
+														defaultValue=""
+														{...register("address")}
+													/>
+												</div>
+
+												{errors && (
+													<p className="detail-tour__error-input">
+														{errors?.address?.message}
+													</p>
+												)}
+												<div className="detail-tour__input">
+													<label htmlFor="yearOfBirth">Năm sinh</label>
+													<input
+														type="text"
+														id="yearOfBirth"
+														defaultValue=""
+														{...register("yearOfBirth")}
+													/>
+												</div>
+
+												{errors && (
+													<p className="detail-tour__error-input">
+														{errors?.yearOfBirth?.message}
+													</p>
+												)}
+												<div className="detail-tour__input">
+													<label htmlFor="phone">Số điện thoại</label>
+													<input
+														type="text"
+														id="phone"
+														defaultValue=""
+														{...register("phone")}
+													/>
+												</div>
+
+												{errors && (
+													<p className="detail-tour__error-input">
+														{errors?.phone?.message}
+													</p>
+												)}
+												<div className="detail-tour__input-sex">
+													<span>Giới tính</span>
+
+													<div>
+														<label htmlFor="man">Nam</label>
+														<input
+															{...register("sex")}
+															type="radio"
+															id="man"
+															value="M"
+														/>
+													</div>
+													<div>
+														<label htmlFor="woman">Nữ</label>
+														<input
+															{...register("sex")}
+															type="radio"
+															id="woman"
+															value="F"
+														/>
+													</div>
+												</div>
+
+												<div className="detail-tour__expense">
+													<div className="detail-tour__expense-price">
+														Giá: {formatPrice(tour?.t_gia)}
+													</div>
+													<div className="detail-tour__expense-sp">
+														Phí hỗ trợ: {formatPrice(supportExpense)}
+													</div>
+													<div className="detail-tour__expense-total">
+														Tổng tiền:{" "}
+														{formatPrice(
+															totalPrice(tour?.t_gia, supportExpense)
+														)}
+													</div>
+												</div>
+
+												<button
+													type="submit"
+													disabled={
+														!checkValidDateTour(
+															new Date(),
+															tour?.t_tgbatdaudk,
+															tour?.t_tgketthucdk
+														)
+													}
+													className={
+														!checkValidDateTour(
+															new Date(),
+															tour?.t_tgbatdaudk,
+															tour?.t_tgketthucdk
+														)
+															? "detail-tour__not-allow detail-tour__booking"
+															: "detail-tour__booking"
+													}
+												>
+													Đăng ký tour
+												</button>
+											</form>
+										),
+									]
+								),
+							]
 						)}
 					</div>
 				</div>

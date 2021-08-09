@@ -23,7 +23,7 @@
 
 	button {
 		padding: 5px;
-		width: 70px;
+		width: 90px !important;
 		height: 30px;
 		background-color: #59d05d;
 		border: 1px solid #59d05d;
@@ -77,8 +77,11 @@
 
 .donvi__more-info {
 	display: flex;
-	justify-content: space-between;
-	margin-right: 60px;
+	button {
+		margin-right: 5px;
+	}
+	// justify-content: space-between;
+	// margin-right: 60px;
 }
 
 .donvi__more-info > span {

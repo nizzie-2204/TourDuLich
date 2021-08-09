@@ -101,6 +101,7 @@ const TableExpense = () => {
 										onClick={() => {
 											handleEditExpense(expense);
 										}}
+										style={{ marginRight: "5px" }}
 									>
 										Sửa
 									</button>

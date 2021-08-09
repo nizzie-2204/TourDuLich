@@ -22,6 +22,7 @@ const AllTour = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const tours = useSelector((state) => state.tour.tours);
+	const user = useSelector((state) => state.auth.user);
 	const toursLoading = useSelector((state) => state.tour.toursLoading);
 
 	// Pagination

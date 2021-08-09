@@ -6,7 +6,7 @@ const adminAPI = {
 			method: "get",
 			url: "/adminsystem/donvi",
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 		});
 	},
@@ -16,7 +16,7 @@ const adminAPI = {
 			method: "get",
 			url: `/adminsystem/donvi/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 		});
 	},
@@ -33,7 +33,7 @@ const adminAPI = {
 			url: "/adminsystem/donvi",
 			headers: {
 				"Content-Type": "multipart/form-data",
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 			data: formData,
 		});
@@ -44,7 +44,7 @@ const adminAPI = {
 			method: "delete",
 			url: `/adminsystem/donvi/${id}`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 		});
 	},
@@ -54,7 +54,7 @@ const adminAPI = {
 			method: "put",
 			url: `/admin/history/donvi/${id}/restore`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 		});
 	},
@@ -64,7 +64,7 @@ const adminAPI = {
 			method: "get",
 			url: `/admin/history/donvi/`,
 			headers: {
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 		});
 	},
@@ -78,7 +78,7 @@ const adminAPI = {
 			headers: {
 				Accept: "application/json",
 				"Content-Type": "application/json",
-				Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+				Authorization: `Bearer ${localStorage.getItem("adminSystemToken")}`,
 			},
 			data: JSON.stringify(name),
 		});

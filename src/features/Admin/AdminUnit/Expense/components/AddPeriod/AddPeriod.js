@@ -220,10 +220,12 @@ const TableExpense = () => {
 												})}
 										</select>
 									</div>
-									<button type="submit">Xác nhận</button>
-									<button type="button" onClick={handleDeletePeriod}>
-										Hủy
-									</button>
+									<div style={{ display: "flex" }}>
+										<button type="submit">Xác nhận</button>
+										<button type="button" onClick={handleDeletePeriod}>
+											Hủy
+										</button>
+									</div>
 								</form>
 							),
 					  ]
@@ -306,10 +308,12 @@ const TableExpense = () => {
 											/>
 										</div>
 									</div>
-									<button type="submit">Xác nhận</button>
-									<button type="button" onClick={handleDeletePeriod}>
-										Hủy
-									</button>
+									<div style={{ display: "flex" }}>
+										<button type="submit">Xác nhận</button>
+										<button type="button" onClick={handleDeletePeriod}>
+											Hủy
+										</button>
+									</div>
 								</form>
 							),
 					  ]

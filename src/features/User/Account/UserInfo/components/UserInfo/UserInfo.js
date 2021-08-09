@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import SidebarUser from "../../../../../../components/User/SidebarUser/SidebarUser";
@@ -30,6 +30,14 @@ const UserInfo = () => {
 	const dispatch = useDispatch();
 	const user = useSelector((state) => state.auth.user);
 
+	const [inputValue, setInputValue] = useState(() => {
+		if (user?.nv_gioitinh === "F") {
+			return "F";
+		} else {
+			return "M";
+		}
+	});
+
 	useEffect(() => {}, [user]);
 
 	const {
@@ -57,8 +65,6 @@ const UserInfo = () => {
 		dispatch(action)
 			.then(unwrapResult)
 			.then((data) => {
-				console.log(data);
-
 				Swal.fire({
 					title: "Sửa thông tin thành công",
 					icon: "success",
@@ -160,9 +166,11 @@ const UserInfo = () => {
 								<input
 									{...register("sex")}
 									type="radio"
-									id="man"
-									checked={user?.nv_gioitinh === "M"}
+									checked={inputValue === "M"}
 									value="M"
+									onClick={() => {
+										setInputValue("M");
+									}}
 								/>
 							</div>
 							<div>
@@ -170,9 +178,11 @@ const UserInfo = () => {
 								<input
 									{...register("sex")}
 									type="radio"
-									id="woman"
-									checked={user?.nv_gioitinh === "F"}
+									checked={inputValue === "F"}
 									value="F"
+									onClick={() => {
+										setInputValue("F");
+									}}
 								/>
 							</div>
 						</div>

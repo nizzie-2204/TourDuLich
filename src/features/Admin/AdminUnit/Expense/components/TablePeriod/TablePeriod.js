@@ -25,8 +25,10 @@ const SearchExpense = () => {
 
 	// Filter periods
 	const filteredPeriod = periods?.filter((item) => {
-		return item.ltk_id === 3;
+		return item?.dv_id === user?.donvi?.id;
 	});
+
+	console.log(filteredPeriod);
 
 	const handleSetPeriod = (period) => {
 		const action = setPeriod(period);
@@ -82,6 +84,7 @@ const SearchExpense = () => {
 										onClick={() => {
 											handleSetPeriod(item);
 										}}
+										style={{ marginRight: "5px" }}
 									>
 										Sửa
 									</button>
@@ -90,6 +93,7 @@ const SearchExpense = () => {
 										onClick={() => {
 											handleDeletePeriodInTable(item.id);
 										}}
+										className="button-red"
 									>
 										Xóa
 									</button>
@@ -100,7 +104,7 @@ const SearchExpense = () => {
 
 				{/* Admin unit */}
 				{user.ltk_id === 2 &&
-					filteredPeriod.map((item) => {
+					filteredPeriod?.map((item) => {
 						return (
 							<tr className={item.id}>
 								<td>{item.id}</td>
@@ -113,6 +117,7 @@ const SearchExpense = () => {
 										onClick={() => {
 											handleSetPeriod(item);
 										}}
+										style={{ marginRight: "5px" }}
 									>
 										Sửa
 									</button>
@@ -121,6 +126,7 @@ const SearchExpense = () => {
 										onClick={() => {
 											handleDeletePeriodInTable(item.id);
 										}}
+										className="button-red"
 									>
 										Xóa
 									</button>

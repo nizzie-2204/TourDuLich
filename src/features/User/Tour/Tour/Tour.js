@@ -4,12 +4,13 @@ import { formatDate, formatPrice } from "../../../../utils/common";
 import "./style.scss";
 
 const Tour = ({ tour }) => {
+	console.log(tour?.hinhtour[0]?.ht_path?.substr(86));
 	return (
 		<Link to={`/tour/${tour?.id}`} className="tour">
 			<div to={`/tour/${tour?.id}`} className="tour__img">
 				<img
 					src={`http://localhost:8000/storage/images/${tour?.hinhtour[0]?.ht_path?.substr(
-						81
+						86
 					)}`}
 					alt="tour"
 					alt={tour?.t_ten}

@@ -13,12 +13,8 @@ const override = css`
 const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
 	const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 	const authLoading = useSelector((state) => state.auth.authLoading);
-
-	const location = useLocation();
-	console.log(location);
+	const user = useSelector((state) => state.auth.user);
 	const history = useHistory();
-
-	// const dispatch = useDispatch();
 
 	return (
 		<>
@@ -28,8 +24,8 @@ const PublicRoute = ({ component: Component, restricted = false, ...rest }) => {
 				<Route
 					{...rest}
 					render={(props) => {
-						return isAuthenticated && restricted ? (
-							history.goBack()
+						return user && restricted ? (
+							<Redirect to="/" />
 						) : (
 							<Component {...props} />
 						);

@@ -77,7 +77,7 @@ const TableUnit = () => {
 										Sửa
 									</button>
 									<button
-										className="donvi_xoa"
+										className="button-red"
 										type="button"
 										onClick={() => {
 											handleDeleteUnit(unit.id);

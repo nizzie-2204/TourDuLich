@@ -48,19 +48,19 @@ const Login = () => {
 				}
 				// // Admin system -> go to admin unit
 				if (data.message.ltk_id === 1) {
-					localStorage.setItem("adminToken", data.Token);
+					localStorage.setItem("adminSystemToken", data.Token);
 					history.push("/admin/unit");
 				}
 
 				// // // Admin unit -> go to admin employee || admin tour
 				if (data.message.ltk_id === 2) {
 					console.log(data.message.ltk_id);
-					localStorage.setItem("adminToken", data.Token);
+					localStorage.setItem("adminUnitToken", data.Token);
 					history.push("/admin/employee");
 				}
 			})
 			.catch((error) => {
-				console.log(error);
+				setErrorSubmit("Tài khoản hoặc mật khẩu không đúng");
 			});
 	};
 
@@ -96,6 +96,7 @@ const Login = () => {
 						<p className="login__error-input">{errors?.password?.message}</p>
 					)}
 				</div>
+
 				<button className="login__submit">Đăng nhập</button>
 
 				{/* Error when submitting */}

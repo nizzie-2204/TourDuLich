@@ -78,16 +78,18 @@ const TableEmployee = () => {
 								<td>{employee?.donvi?.dv_ten}</td>
 								<td>{employee.username}</td>
 								<td>{employee.nv_sdt}</td>
-								<td>
+								<td className="employee__more-info">
 									<button
 										type="button"
 										onClick={() => {
 											handleGetEmployee(employee.id);
 										}}
+										style={{ width: "70px !important" }}
 									>
 										Sửa
 									</button>
 									<button
+										style={{ width: "70px !important" }}
 										type="button"
 										class="button-red nhanvien__button-del"
 										onClick={() => {
@@ -114,8 +116,9 @@ const TableEmployee = () => {
 								<td>{employee?.donvi?.dv_ten}</td>
 								<td>{employee.username}</td>
 								<td>{employee.nv_sdt}</td>
-								<td>
+								<td className="employee__more-info">
 									<button
+										style={{ width: "70px !important" }}
 										type="button"
 										onClick={() => {
 											handleGetEmployee(employee.id);
@@ -124,6 +127,7 @@ const TableEmployee = () => {
 										Sửa
 									</button>
 									<button
+										style={{ width: "70px !important" }}
 										type="button"
 										class="button-red nhanvien__button-del"
 										onClick={() => {
